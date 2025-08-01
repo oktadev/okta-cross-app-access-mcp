@@ -1,0 +1,23 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "6 - Implement token validation in the MCP server",
+  "steps": [
+    {
+      "title": "Token validation in the MCP server",
+      "file": "packages/agent0/src/mcp-server/todo-mcp-server.ts",
+      "description": "As you inspected the MCP server is not protected! Add or insert code to get the an access token. \n\n```ts\nconst accessToken = process.env.ACCESS_TOKEN;\n      if (!accessToken) {\n        console.error('❌ ACCESS_TOKEN not found in environment');\n        return {\n          content: [\n            {\n              type: 'text',\n              text: `❌ Error: ACCESS_TOKEN not configured. Cannot fetch todos.`,\n            },\n          ],\n        };\n      }\n```",
+      "line": 339,
+      "selection": {
+        "start": {
+          "line": 1,
+          "character": 1
+        },
+        "end": {
+          "line": 1,
+          "character": 98
+        }
+      }
+    }
+  ],
+  "ref": "oktane-lab"
+}

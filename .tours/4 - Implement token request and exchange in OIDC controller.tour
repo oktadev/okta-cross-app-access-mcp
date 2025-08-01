@@ -1,0 +1,23 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "4 - Implement token request and exchange in OIDC controller",
+  "steps": [
+    {
+      "title": "Review requestIdJwtAuthzGrant and exchangeIdJwtAuthzGrant functions",
+      "description": "These functions implement the OAuth 2.0 Identity Assertion Authorization Grant specification:\n\n`requestIdJwtAuthzGrant`\n- Purpose: Exchanges an OIDC ID token (or SAML assertion) for a JWT Identity Assertion Authorization Grant\n- OAuth Flow: Token Exchange (RFC 8693)\n- Request: grant_type=token-exchange, requested_token_type=id-jag, subject_token=<ID_TOKEN>\n- Returns: JWT Identity Assertion Authorization Grant\n\n`exchangeIdJwtAuthzGrant`\n- Purpose: Exchanges the JWT Identity Assertion Authorization Grant for an access token\n- OAuth Flow: JWT Bearer Grant (RFC 7523)\n- Request: grant_type=jwt-bearer, assertion=<AUTHORIZATION_GRANT>\n- Returns: Access token for API calls\n\nOAuth Token Types Used:\n- JWT_ID_JAG = 'urn:ietf:params:oauth:token-type:id-jag' - Identity Assertion Authorization Grant\n- ID_TOKEN = 'urn:ietf:params:oauth:token-type:id_token' - OIDC ID Token\n- TOKEN_EXCHANGE = 'urn:ietf:params:oauth:grant-type:token-exchange' - RFC 8693\n- JWT_BEARER = 'urn:ietf:params:oauth:grant-type:jwt-bearer' - RFC 7523\n"
+    },
+    {
+      "title": "Request an authorization grant token from the Identity Provider (IdP)",
+      "file": "packages/agent0/src/server/controllers/oidc.ts",
+      "description": "Code or insert the following code:\n\n```ts\nlet authGrantResponse: ExchangeTokenResult;\n\n  try {\n    authGrantResponse = await requestIdJwtAuthzGrant({\n      tokenUrl: `${process.env.AUTH_SERVER}/token`,\n      audience: process.env.TODO_AUTH_SERVER,\n      subjectToken: idToken.toString(),\n      // This is hardcoded to what we use for Okta.\n      // TODO: Should be using cached value from where we got the id token\n      subjectTokenType: 'oidc',\n      scopes: ['read', 'write'], // Can be undefined, will default to empty string\n      clientID: process.env.CLIENT1_CLIENT_ID!,\n      clientSecret: process.env.CLIENT1_CLIENT_SECRET!,\n    });\n  } catch (error: unknown) {\n    // Errors if there was an issue making the request or parsing the response.\n    console.log('Failed to obtain authorization grant', { error });\n\n    done(null, user);\n    return;\n  } \n\n  if ('error' in accessTokenResponse) {\n    console.log('Failed to exchange authorization grant for access token', {\n      error: accessTokenResponse.error,\n    });\n\n    done(null, user);\n    return;\n  ```\n  ",
+      "line": 116
+    },
+    {
+      "title": "Exchange the authorization grant token for an access token with the resource server",
+      "file": "packages/agent0/src/server/controllers/oidc.ts",
+      "description": "Exchange the authorization grant token for an access token from the resource server (TODO Authorization Server)\n\n```ts\nlet accessTokenResponse: AccessTokenResult;\n  console.log('here', authGrantToken.access_token);\n  try {\n    accessTokenResponse = await exchangeIdJwtAuthzGrant({\n      tokenUrl: `${process.env.TODO_AUTH_SERVER}/token`,\n      authorizationGrant: authGrantToken.access_token,\n      scopes: ['read', 'write'],\n      clientID: process.env.CLIENT2_CLIENT_ID!,\n      clientSecret: process.env.CLIENT2_CLIENT_SECRET,\n    });\n  } catch (error: unknown) {\n    // Errors if there was an issue making the request or parsing the response.\n    console.log('Failed to exchange the authorization grant', {\n      error,\n    });\n\n    done(null, user);\n    return;\n  }\n\n  if ('error' in accessTokenResponse) {\n    console.log('Failed to exchange authorization grant for access token', {\n      error: accessTokenResponse.error,\n    });\n\n    done(null, user);\n    return;\n  }\n  ```\n\n  ",
+      "line": 119
+    }
+  ],
+  "ref": "oktane-lab"
+}

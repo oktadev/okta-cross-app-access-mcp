@@ -336,18 +336,7 @@ class TodoMCPServer {
       console.error('📋 Fetching todos from API...');
 
       // Get ACCESS_TOKEN from environment
-      const accessToken = process.env.ACCESS_TOKEN;
-      if (!accessToken) {
-        console.error('❌ ACCESS_TOKEN not found in environment');
-        return {
-          content: [
-            {
-              type: 'text',
-              text: `❌ Error: ACCESS_TOKEN not configured. Cannot fetch todos.`,
-            },
-          ],
-        };
-      }
+      
 
       // Make API call to fetch todos
       const response = await fetch('http://localhost:3001/api/todos', {

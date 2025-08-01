@@ -1,0 +1,11 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "1 - Okta dashboard setup run lab with Readme instructions",
+  "steps": [
+    {
+      "title": "Authorization server setup",
+      "description": "Use the Authorization Server info in CAA sample project:\n\n`packages/authorization-server/.env.todo.default`\n\n// The enterprise IDP config for a customer\nCUSTOMER1_EMAIL_DOMAIN=\"tables.fake\"\nCUSTOMER1_AUTH_ISSUER=\"https://{orgDomain}.oktapreview.com\"\nCUSTOMER1_CLIENT_ID=\"todo0_client_id\"\nCUSTOMER1_CLIENT_SECRET=\"todo0_client_secret\"\n\nNote: Add client id and secret from the Todo App App Todo0 > Sign On tab\n\n`packages/authorization-server/.env.agent.default`\n\n// The enterprise IDP config for a customer\nCUSTOMER1_EMAIL_DOMAIN=\"tables.fake\"\nCUSTOMER1_AUTH_ISSUER=\"https://{orgDomain}.oktapreview.com\"\nCUSTOMER1_CLIENT_ID=\"agent0_client_id\"\nCUSTOMER1_CLIENT_SECRET=\"agent0_client_secret\""
+    }
+  ],
+  "ref": "oktane-lab"
+}

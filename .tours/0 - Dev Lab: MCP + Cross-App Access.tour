@@ -1,0 +1,11 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "0 - Dev Lab: MCP + Cross-App Access",
+  "steps": [
+    {
+      "title": "Introduction",
+      "description": "In this workshop, you will focus on building a Cross-App Access-enabled MCP client. The workshop goals are: \n\n- Learn what Cross-App Access is and what problem it solves.\n- Implement and test the code that demonstrates Cross-App Access.\n- Implement code protect MCP server endpoints with access tokens.\n\nThe core learning objective is the following OAuth flow:\n1. User authenticates → gets ID token\n2. Exchange ID token for authorization grant (requestIdJwtAuthzGrant)\n3. Exchange authorization grant for access token (exchangeIdJwtAuthzGrant)\n4. Use an access token to call the protected MCP server API\n\nTo complete the workshop, your list of Todos includes:\n- Configure Okta setup and run lab with Readme instructions\n- Run current MCP server (with no auth)\n- Review implementation of SSO using the OIDC middleware, Passport\n- Implement token validation in MCP server\n- Implement token request and exchange in OIDC controller\n- Implement database token storage\n- Review access token validation using passport-jwt\n- Review best practices \n- Lab complete and next steps!"
+    }
+  ],
+  "ref": "oktane-lab"
+}

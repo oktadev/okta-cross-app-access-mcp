@@ -1,0 +1,33 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "3 - Review implementation of SSO using Passport",
+  "steps": [
+    {
+      "title": "OIDC authentication flow",
+      "file": "packages/agent0/src/server/controllers/oidc.ts",
+      "description": "Nothing to do here, just review how we get the ID token for ID-JAG exchange using Passport. The ID token comes from the OpenID Connect authentication flow handled by the passport-openidconnect library.",
+      "line": 224,
+      "selection": {
+        "start": {
+          "line": 1,
+          "character": 61
+        },
+        "end": {
+          "line": 1,
+          "character": 76
+        }
+      }
+    },
+    {
+      "title": "Passport verify callback",
+      "file": "packages/agent0/src/server/controllers/oidc.ts",
+      "description": "The passport-openidconnect strategy automatically passes the ID token to your verify callback. So the ID token comes from the successful OIDC authentication handled automatically by passport-openidconnect. It's the JWT that contains the user's identity claims from the identity provider (Okta in this case).",
+      "line": 53
+    },
+    {
+      "title": "Recap: The complete SSO/OIDC flow",
+      "description": "1. User starts login: /api/openid/start/user@example.com\n2. Redirect to Identity Provider (IdP): User redirected to Okta/OAuth server for authentication\n3. User authenticates: Enters credentials at IdP\n4. IdP callback: IdP redirects back to /api/openid/callback/ with authorization code\n5. Token exchange: passport-openidconnect exchanges authorization code for tokens (access token, ID token)\n6. Verify callback: Passport calls your verify() function with the ID token\n\nNow let's use ID token to call requestIdJwtAuthzGrant() in the next step."
+    }
+  ],
+  "ref": "oktane-lab"
+}

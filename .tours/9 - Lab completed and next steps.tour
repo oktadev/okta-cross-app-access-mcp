@@ -1,0 +1,11 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "9 - Lab complete!",
+  "steps": [
+    {
+      "title": "Next steps",
+      "description": "read blog https://developer.okta.com/blog/2025/06/23/enterprise-ai\nsign up for CAA early access\n"
+    }
+  ],
+  "ref": "oktane-lab"
+}
