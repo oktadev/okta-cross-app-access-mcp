@@ -1,0 +1,41 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "7 - Review access token validation using passport-jwt",
+  "steps": [
+    {
+      "title": "MCP server makes API call",
+      "file": "packages/agent0/src/mcp-server/todo-mcp-server.ts",
+      "description": "Nothing to do here but review how access tokens are validated in the Todo API that the MCP server calls.",
+      "line": 341
+    },
+    {
+      "title": "Express middleware chain",
+      "file": "packages/todo0/src/server/main.ts",
+      "description": "Nothing to do here but review how access tokens are validated in the Todo API that the MCP server calls.",
+      "line": 82
+    },
+    {
+      "title": "Authentication middleware",
+      "file": "packages/todo0/src/server/main.ts",
+      "description": "Nothing to do here but review how access tokens are validated in the Todo API that the MCP server calls.",
+      "line": 69
+    },
+    {
+      "title": "JWT strategy validation",
+      "file": "packages/todo0/src/server/jwt/jwt-strategy.ts",
+      "description": "Nothing to do here but review how access tokens are validated in the Todo API that the MCP server calls.",
+      "line": 17
+    },
+    {
+      "title": "Protected endpoint access",
+      "file": "packages/todo0/src/server/controllers/todo.ts",
+      "description": "Nothing to do here but review how access tokens are validated in the Todo API that the MCP server calls.",
+      "line": 8
+    },
+    {
+      "title": "Recap token validation steps",
+      "description": "Recap Token Validation Steps:\n\n1. Extract Bearer token from the Authorization header\n2. Fetch public key from authorization server's JWKS endpoint\n3. Verify JWT signature using RS256 algorithm\n4. Validate claims: issuer, audience, expiration\n5. Look up user in database using sub claim\n6. Authorize access to user-scoped resources\n\nThis implements proper JWT validation with public key cryptography, ensuring only tokens issued by the trusted authorization server can access the Todo API."
+    }
+  ],
+  "ref": "oktane-lab"
+}

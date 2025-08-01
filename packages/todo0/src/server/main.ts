@@ -68,8 +68,9 @@ passport.use(JWT_STRATEGY_NAME, jwtStrategy);
 
 const authenticated: RequestHandler = (req, res, next) => {
   if (req.isUnauthenticated()) {
+    // Use Passport JWT strategy to validate the Bearer token
     passport.authenticate(JWT_STRATEGY_NAME, {
-      session: false,
+      session: false, // Stateless JWT validation
       passReqToCallback: true,
       failWithError: false,
     })(req, res, next);

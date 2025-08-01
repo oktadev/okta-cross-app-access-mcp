@@ -113,7 +113,7 @@ const verify = async (
   }
 
   // For all resources, do this flow
-  let authGrantResponse: ExchangeTokenResult;
+  // Add code here to request an authorization grant token from the Identity Provider (IdP)
 
   try {
     authGrantResponse = await requestIdJwtAuthzGrant({
@@ -140,82 +140,9 @@ const verify = async (
       error: authGrantResponse.error,
     });
 
-    done(null, user);
-    return;
-  }
-
-  const { payload: authGrantToken } = authGrantResponse;
-
-  let accessTokenResponse: AccessTokenResult;
-  console.log('here', authGrantToken.access_token);
-  try {
-    accessTokenResponse = await exchangeIdJwtAuthzGrant({
-      tokenUrl: `${process.env.TODO_AUTH_SERVER}/token`,
-      authorizationGrant: authGrantToken.access_token,
-      scopes: ['read', 'write'],
-      clientID: process.env.CLIENT2_CLIENT_ID!,
-      clientSecret: process.env.CLIENT2_CLIENT_SECRET,
-    });
-  } catch (error: unknown) {
-    // Errors if there was an issue making the request or parsing the response.
-    console.log('Failed to exchange the authorization grant', {
-      error,
-    });
-
-    done(null, user);
-    return;
-  }
-
-  if ('error' in accessTokenResponse) {
-    console.log('Failed to exchange authorization grant for access token', {
-      error: accessTokenResponse.error,
-    });
-
-    done(null, user);
-    return;
-  }
-
   // TODO: Refresh token
-  const accessToken = accessTokenResponse.payload;
+  // Add code here to save the access token to the user record in the database
 
-  try {
-    await prisma.authorizationToken.upsert({
-      where: {
-        orgId_userId_resource: {
-          userId: user.id,
-          orgId: user.orgId,
-          resource: 'CLIENT2',
-        },
-      },
-      create: {
-        userId: user.id,
-        orgId: user.orgId,
-        resource: 'CLIENT2',
-        accessToken: accessToken.access_token,
-        refreshToken: accessToken.refresh_token,
-        jagToken: authGrantToken.access_token,
-        idToken: idToken.toString(),
-        expiresAt: new Date(Date.now() + (accessToken.expires_in ?? 0) * 1000),
-        status: 'ACTIVE',
-      },
-      update: {
-        accessToken: accessToken.access_token,
-        refreshToken: accessToken.refresh_token,
-        jagToken: authGrantToken.access_token,
-        idToken: idToken.toString(),
-        expiresAt: new Date(Date.now() + (accessToken.expires_in ?? 0) * 1000),
-        status: 'ACTIVE',
-      },
-    });
-  } catch (error: unknown) {
-    if (error instanceof Error) {
-      done(error);
-    }
-    return;
-  }
-
-  done(null, user);
-};
 
 function createStrategy(username: string) {
   const strategyName = 'openidconnect';
