@@ -3,8 +3,36 @@
   "title": "1 - Okta dashboard setup run lab with Readme instructions",
   "steps": [
     {
-      "title": "Authorization server setup",
-      "description": "Use the Authorization Server info in CAA sample project:\n\n`packages/authorization-server/.env.todo.default`\n\n// The enterprise IDP config for a customer\nCUSTOMER1_EMAIL_DOMAIN=\"tables.fake\"\nCUSTOMER1_AUTH_ISSUER=\"https://{orgDomain}.oktapreview.com\"\nCUSTOMER1_CLIENT_ID=\"todo0_client_id\"\nCUSTOMER1_CLIENT_SECRET=\"todo0_client_secret\"\n\nNote: Add client id and secret from the Todo App App Todo0 > Sign On tab\n\n`packages/authorization-server/.env.agent.default`\n\n// The enterprise IDP config for a customer\nCUSTOMER1_EMAIL_DOMAIN=\"tables.fake\"\nCUSTOMER1_AUTH_ISSUER=\"https://{orgDomain}.oktapreview.com\"\nCUSTOMER1_CLIENT_ID=\"agent0_client_id\"\nCUSTOMER1_CLIENT_SECRET=\"agent0_client_secret\""
+      "title": "Login to your Okta admin dashboard",
+      "description": "Get your Okta credentials by following these steps:\n\n1. Go to https://learning.okta.com/ to sign in\n2. Once signed in click on “View My Labs”\n3. Here you will see all the Oktane Labs you are currently registered for. Click on your assigned lab. \n5) Click “Get Started” and you will then see your Okta credentials on the right hand side (once you click “Show Credentials”)."
+    },
+    {
+      "file": "packages/authorization-server/.env.agent.default",
+      "description": "Fill in the following info from your Okta dashboard. You can find the Add client id and secret from the Agent0 App > Sign On tab. \n\n// The enterprise IDP config for a customer CUSTOMER1_EMAIL_DOMAIN=\"tables.fake\" CUSTOMER1_AUTH_ISSUER=\"https://{orgDomain}.oktapreview.com\" CUSTOMER1_CLIENT_ID=\"agent0_client_id\" CUSTOMER1_CLIENT_SECRET=\"agent0_client_secret\"",
+      "line": 15,
+      "selection": {
+        "start": {
+          "line": 1,
+          "character": 1
+        },
+        "end": {
+          "line": 3,
+          "character": 227
+        }
+      },
+      "title": "Agent0 authorization server setup"
+    },
+    {
+      "file": "packages/authorization-server/.env.todo.default",
+      "description": "Fill in the following info from your Okta dashboard. You can find the Add client id and secret from the Todo0 App > Sign On tab. \n\n// The enterprise IDP config for a customer CUSTOMER1_EMAIL_DOMAIN=\"tables.fake\" CUSTOMER1_AUTH_ISSUER=\"https://{orgDomain}.oktapreview.com\" CUSTOMER1_CLIENT_ID=\"agent0_client_id\" CUSTOMER1_CLIENT_SECRET=\"agent0_client_secret\"",
+      "line": 18,
+      "title": "Todo0 authorization server setup"
+    },
+    {
+      "file": "/packages/agent0/.env.default",
+      "description": "Add your AWS credentials to this file.\n\n- AWS_ACCESS_KEY_ID=\n- AWS_SECRET_ACCESS_KEY=",
+      "line": 26,
+      "title": "AWS credentials setup"
     }
   ],
   "ref": "oktane-lab"
