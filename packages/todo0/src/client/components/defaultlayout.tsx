@@ -23,7 +23,7 @@ function DefaultLayout() {
 
   return (
     <div>
-      <Sidebar className="fixed top-0 left-0 z-40 w-80 h-screen transition-transform -translate-x-full bg-white border-r border-gray-200 md:translate-x-0 dark:bg-gray-800 dark:border-gray-700 py-6 px-2">
+      <Sidebar className="fixed top-0 left-0 z-40 w-60 h-screen transition-transform -translate-x-full bg-white border-r border-gray-200 md:translate-x-0 dark:bg-gray-800 dark:border-gray-700 py-6 px-2">
         <Sidebar.Logo
           href="/"
           img={todoListIcon}
@@ -60,7 +60,7 @@ function DefaultLayout() {
           </Sidebar.ItemGroup>
         </Sidebar.Items>
       </Sidebar>
-      <main className="md:ml-80 h-auto">
+      <main className="ml-24 w-full h-auto">
         <Outlet />
       </main>
       <ConfirmModal

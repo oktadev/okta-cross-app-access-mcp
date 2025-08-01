@@ -105,14 +105,14 @@ function Todos() {
   };
 
   return (
-    <div className="relative">
+    <div className="w-full">
       {authState.isAuthenticated && (
         <>
-          <h1 className="text-left mt-24 mb-6 mx-24 w-96 text-stone-900 text-5xl font-bold font-['Inter']">
+          <h1 className="text-left mt-24 mb-6 w-full mx-auto w-1200 text-stone-900 text-5xl font-bold font-['Inter']">
             Today
           </h1>
-          <div className="todo-card w-3/5 text-left mx-24 border border-slate-200">
-            <div className="max-w px-8 py-6 flex justify-between gap-6">
+          <div className="todo-card w-full text-left mx-auto border border-slate-200">
+            <div className="w-full px-8 py-6 flex justify-between gap-6">
               <input
                 className="w-5/6 text-m text-slate-900 placeholder-slate-400 rounded-md py-2 pl-2 ring-1 border-none bg-gray-50 ring-slate-200"
                 type="text"
