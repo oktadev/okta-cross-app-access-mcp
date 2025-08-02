@@ -5,7 +5,7 @@
     {
       "title": "Starting point",
       "file": "packages/agent0/src/mcp-server/todo-mcp-server.ts",
-      "description": "This is our starting point. No auth tokens to pass to MCP server tools. We need to build the parts leading up to the MCP client getting an access token to the MCP Server API. It must first request an ID-JAG token with an ID token to the Identity Provider (IdP), in this case, Okta, and then exchange the ID-JAG token for an access token at the Todo authorization server (AS) so that it can get access to retrieve the necessary tools at the Todo MCP server API. \n\nLet's start by reviewing the code to obtain an ID token.",
+      "description": "This is our starting point with no auth tokens to fetch user todos pass to MCP server. We need to build the parts leading up to the MCP client getting an access token to the MCP Server. It must first request an ID-JAG token with an ID token to the Identity Provider (IdP), in this case, Okta, and then exchange the ID-JAG token for an access token at the Todo authorization server (AS) so that it can get access to retrieve the necessary tools at the Todo MCP server API. \n\nLet's start by reviewing the code to obtain an ID token.",
       "line": 338
     }
   ],

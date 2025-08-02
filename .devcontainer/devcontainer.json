@@ -19,7 +19,8 @@
         "esbenp.prettier-vscode",
         "editorconfig.editorconfig",
         "marclipovsky.string-manipulation",
-        "Tyriar.sort-lines"
+        "Tyriar.sort-lines",
+        "vsls-contrib.codetour"
       ],
       "settings": {
         "typescript.inlayHints.parameterNames.enabled": "literals",

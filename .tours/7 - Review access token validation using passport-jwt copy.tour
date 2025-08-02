@@ -12,7 +12,7 @@
       "title": "Express middleware chain",
       "file": "packages/todo0/src/server/main.ts",
       "description": "Nothing to do here but review how access tokens are validated in the Todo API that the MCP server calls.",
-      "line": 82
+      "line": 83
     },
     {
       "title": "Authentication middleware",

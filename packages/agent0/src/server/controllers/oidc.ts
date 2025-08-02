@@ -115,33 +115,89 @@ const verify = async (
   // For all resources, do this flow
   // Add code here to request an authorization grant token from the Identity Provider (IdP)
 
-  try {
-    authGrantResponse = await requestIdJwtAuthzGrant({
-      tokenUrl: `${process.env.AUTH_SERVER}/token`,
-      audience: process.env.TODO_AUTH_SERVER!,
-      subjectToken: idToken.toString(),
-      // This is hardcoded to what we use for Okta.
-      // TODO: Should be using cached value from where we got the id token
-      subjectTokenType: 'oidc',
-      scopes: ['read', 'write'], // Can be undefined, will default to empty string
-      clientID: process.env.CLIENT1_CLIENT_ID!,
-      clientSecret: process.env.CLIENT1_CLIENT_SECRET!,
-    });
-  } catch (error: unknown) {
-    // Errors if there was an issue making the request or parsing the response.
-    console.log('Failed to obtain authorization grant', { error });
 
-    done(null, user);
-    return;
-  }
 
-  if ('error' in authGrantResponse) {
-    console.log('Failed to obtain authorization grant', {
-      error: authGrantResponse.error,
-    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Add code here to exchange the authorization grant token for an access token from the resource server (TODO Authorization Server)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // TODO: Refresh token
   // Add code here to save the access token to the user record in the database
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function createStrategy(username: string) {

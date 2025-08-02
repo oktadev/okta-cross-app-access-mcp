@@ -16,7 +16,7 @@
       "title": "Exchange the authorization grant token for an access token with the resource server",
       "file": "packages/agent0/src/server/controllers/oidc.ts",
       "description": "Exchange the authorization grant token for an access token from the resource server (TODO Authorization Server)\n\n```ts\nlet accessTokenResponse: AccessTokenResult;\n  console.log('here', authGrantToken.access_token);\n  try {\n    accessTokenResponse = await exchangeIdJwtAuthzGrant({\n      tokenUrl: `${process.env.TODO_AUTH_SERVER}/token`,\n      authorizationGrant: authGrantToken.access_token,\n      scopes: ['read', 'write'],\n      clientID: process.env.CLIENT2_CLIENT_ID!,\n      clientSecret: process.env.CLIENT2_CLIENT_SECRET,\n    });\n  } catch (error: unknown) {\n    // Errors if there was an issue making the request or parsing the response.\n    console.log('Failed to exchange the authorization grant', {\n      error,\n    });\n\n    done(null, user);\n    return;\n  }\n\n  if ('error' in accessTokenResponse) {\n    console.log('Failed to exchange authorization grant for access token', {\n      error: accessTokenResponse.error,\n    });\n\n    done(null, user);\n    return;\n  }\n  ```\n\n  ",
-      "line": 119
+      "line": 174
     }
   ],
   "ref": "oktane-lab"
