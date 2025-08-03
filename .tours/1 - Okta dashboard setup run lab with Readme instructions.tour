@@ -9,17 +9,7 @@
     {
       "file": "packages/authorization-server/.env.agent.default",
       "description": "Fill in the following info from your Okta dashboard. You can find the Add client id and secret from the Application tab > Agent0 App > Sign On tab. \n\n// The enterprise IDP config for a customer CUSTOMER1_EMAIL_DOMAIN=\"tables.fake\" \n- CUSTOMER1_AUTH_ISSUER=\"https://{orgDomain}.oktapreview.com\" \n- CUSTOMER1_CLIENT_ID=\"agent0_client_id\" \n- CUSTOMER1_CLIENT_SECRET=\"agent0_client_secret\"",
-      "line": 15,
-      "selection": {
-        "start": {
-          "line": 1,
-          "character": 1
-        },
-        "end": {
-          "line": 3,
-          "character": 23
-        }
-      },
+      "line": 18,
       "title": "Agent0 authorization server setup"
     },
     {
