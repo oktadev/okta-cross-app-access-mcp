@@ -1,12 +1,12 @@
 {
   "$schema": "https://aka.ms/codetour-schema",
-  "title": "7 - Review access token validation using passport-jwt",
+  "title": "6 - Review access token validation using passport-jwt",
   "steps": [
     {
       "title": "MCP server makes API call",
       "file": "packages/agent0/src/mcp-server/todo-mcp-server.ts",
       "description": "Nothing to do here but review how access tokens are validated in the Todo API that the MCP server calls.",
-      "line": 341
+      "line": 352
     },
     {
       "title": "Express middleware chain",

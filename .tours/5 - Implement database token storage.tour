@@ -1,12 +1,13 @@
 {
   "$schema": "https://aka.ms/codetour-schema",
-  "title": "5 - Implement database token storage",
+  "title": "4 - Implement database token storage",
   "steps": [
-     {
+    {
       "title": "Store the access token in the database",
       "file": "packages/agent0/src/server/controllers/oidc.ts",
       "description": "Add code to save the access token to the user record in the database\n\n```ts\nconst accessToken = accessTokenResponse.payload;\n\n  try {\n    await prisma.authorizationToken.upsert({\n      where: {\n        orgId_userId_resource: {\n          userId: user.id,\n          orgId: user.orgId,\n          resource: 'CLIENT2',\n        },\n      },\n      create: {\n        userId: user.id,\n        orgId: user.orgId,\n        resource: 'CLIENT2',\n        accessToken: accessToken.access_token,\n        refreshToken: accessToken.refresh_token,\n        jagToken: authGrantToken.access_token,\n        idToken: idToken.toString(),\n        expiresAt: new Date(Date.now() + (accessToken.expires_in ?? 0) * 1000),\n        status: 'ACTIVE',\n      },\n      update: {\n        accessToken: accessToken.access_token,\n        refreshToken: accessToken.refresh_token,\n        jagToken: authGrantToken.access_token,\n        idToken: idToken.toString(),\n        expiresAt: new Date(Date.now() + (accessToken.expires_in ?? 0) * 1000),\n        status: 'ACTIVE',\n      },\n    });\n  } catch (error: unknown) {\n    if (error instanceof Error) {\n      done(error);\n    }\n    return;\n  }\n\n  done(null, user);\n};\n```",
-      "line": 203
+      "line": 182,
+      "endLine": 221
     }
   ],
   "ref": "oktane-lab"

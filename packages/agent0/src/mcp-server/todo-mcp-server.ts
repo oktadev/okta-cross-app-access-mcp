@@ -336,7 +336,7 @@ class TodoMCPServer {
       console.error('📋 Fetching todos from API...');
 
       // Get ACCESS_TOKEN from environment
-      
+
 
       // Make API call to fetch todos
       const response = await fetch('http://localhost:3001/api/todos', {

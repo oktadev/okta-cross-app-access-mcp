@@ -1,22 +1,12 @@
 {
   "$schema": "https://aka.ms/codetour-schema",
-  "title": "3 - Review implementation of SSO using Passport",
+  "title": "2 - Review implementation of SSO using Passport",
   "steps": [
     {
       "title": "OIDC authentication flow",
       "file": "packages/agent0/src/server/controllers/oidc.ts",
       "description": "Nothing to do here, just review how we get the ID token for ID-JAG exchange using Passport. The ID token comes from the OpenID Connect authentication flow handled by the passport-openidconnect library.",
-      "line": 233,
-      "selection": {
-        "start": {
-          "line": 1,
-          "character": 61
-        },
-        "end": {
-          "line": 1,
-          "character": 76
-        }
-      }
+      "line": 130
     },
     {
       "title": "Passport verify callback",

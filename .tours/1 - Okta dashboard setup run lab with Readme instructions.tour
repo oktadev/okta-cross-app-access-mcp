@@ -1,6 +1,6 @@
 {
   "$schema": "https://aka.ms/codetour-schema",
-  "title": "1 - Okta dashboard setup run lab with Readme instructions",
+  "title": "7 - Okta dashboard setup run lab with Readme instructions",
   "steps": [
     {
       "title": "Login to your Okta admin dashboard",
@@ -31,7 +31,7 @@
     {
       "file": "/packages/agent0/.env.default",
       "description": "Add your AWS credentials to this file.\n\n- AWS_ACCESS_KEY_ID=\n- AWS_SECRET_ACCESS_KEY=",
-      "line": 26,
+      "line": 30,
       "title": "AWS credentials setup"
     }
   ],

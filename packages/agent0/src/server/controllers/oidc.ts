@@ -116,88 +116,11 @@ const verify = async (
   // Add code here to request an authorization grant token from the Identity Provider (IdP)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Add code here to exchange the authorization grant token for an access token from the resource server (TODO Authorization Server)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // TODO: Refresh token
-  // Add code here to save the access token to the user record in the database
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// TODO: Refresh token
+// Add code here to save the access token to the user record in the database
 
 
 function createStrategy(username: string) {
