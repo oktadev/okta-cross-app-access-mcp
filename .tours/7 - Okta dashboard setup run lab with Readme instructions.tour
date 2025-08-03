@@ -23,6 +23,18 @@
       "description": "Add your AWS credentials to this file.\n\n- AWS_ACCESS_KEY_ID=\n- AWS_SECRET_ACCESS_KEY=",
       "line": 30,
       "title": "AWS credentials setup"
+    },
+    {
+      "title": "Run project according to Readme instructions",
+      "description": "Follow the Readme instructions [here](https://github.com/oktadev/okta-cross-app-access-mcp) to run the project."
+    },
+    {
+      "title": "Login with test user in incognito mode",
+      "description": "Open an new window in incognitio mode and open both the Agent0 app and the Todo0 app. Login with the test user bob@tables.fake. A unique password is provided in your initial Okta org setup instructions."
+    },
+    {
+      "title": "Run project according to Readme instructions",
+      "description": "Once logged in test the following scenarios:\n\n1. Add a few tasks on your Todo0 app and check mark one as complete.\n2. Go back to your Agent0 app and add the prompt: `What's still on my plate?`\n\nNote: Here you are not prompted for consent for Agent0 to access your Todo0 app.\n\n3. Still at your Agent0 app add a new to do using the following prompt: \n`Add a new todo: ‘add your test todo task here.’`\n"
     }
   ],
   "ref": "oktane-lab"
