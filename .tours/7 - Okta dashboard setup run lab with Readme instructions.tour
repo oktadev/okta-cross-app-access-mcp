@@ -7,34 +7,12 @@
       "description": "Get your Okta credentials by following these steps:\n\n1. Go to https://learning.okta.com/ to sign in\n2. Once signed in click on “View My Labs”\n3. Here you will see all the Oktane Labs you are currently registered for. Click on your assigned lab. \n4. Click “Get Started” and you will then see your Okta credentials on the right hand side (once you click “Show Credentials”).\n\nNote the following down:\n\n- Your Okta org\n- Agent0 client id and client secret\n- Todo0 client id and client secret\n- AWS access key id and secret key id"
     },
     {
-      "file": "packages/authorization-server/.env.agent.default",
-      "description": "Fill in the following info from your Okta dashboard. You can find the Add client id and secret from the Application tab > Agent0 App > Sign On tab. \n\n// The enterprise IDP config for a customer CUSTOMER1_EMAIL_DOMAIN=\"tables.fake\" \n- CUSTOMER1_AUTH_ISSUER=\"https://{orgDomain}.oktapreview.com\" \n- CUSTOMER1_CLIENT_ID=\"agent0_client_id\" \n- CUSTOMER1_CLIENT_SECRET=\"agent0_client_secret\"",
-      "line": 18,
-      "title": "Agent0 authorization server setup"
-    },
-    {
-      "file": "packages/authorization-server/.env.todo.default",
-      "description": "Fill in the following info from your Okta dashboard. You can find the Add client id and secret from the Applications tab > Todo0 App > Sign On tab. \n\n// The enterprise IDP config for a customer CUSTOMER1_EMAIL_DOMAIN=\"tables.fake\"  \n- CUSTOMER1_AUTH_ISSUER=\"https://{orgDomain}.oktapreview.com\" \n- CUSTOMER1_CLIENT_ID=\"agent0_client_id\" \n- CUSTOMER1_CLIENT_SECRET=\"agent0_client_secret\"",
-      "line": 18,
-      "title": "Todo0 authorization server setup"
-    },
-    {
-      "file": "/packages/agent0/.env.default",
-      "description": "Add your AWS credentials to this file.\n\n- AWS_ACCESS_KEY_ID=\n- AWS_SECRET_ACCESS_KEY=",
-      "line": 30,
-      "title": "AWS credentials setup"
-    },
-    {
       "title": "Run project according to Readme instructions",
-      "description": "Follow the Readme instructions [here](https://github.com/oktadev/okta-cross-app-access-mcp) to run the project."
+      "description": "Troubleshooting tips:\n\nBe sure to run `yarn install` if you don't already have yarn.\n\nSecure credentials setup:\n\nLook for the following files `.env.agent`, `.env.todo`, `.env` to add your Okta credentials. These files will listed under gitignore and will not be commited to your GitHub repo.\n\nAfter running `yarn:setup` you should get a file called `.env.agent` under `packages/authorization-server`. Fill in the following info from your Okta dashboard. You can find the Add client id and secret from the Application tab > Agent0 App > Sign On tab. \n\n// The enterprise IDP config for a customer CUSTOMER1_EMAIL_DOMAIN=\"tables.fake\" \n- CUSTOMER1_AUTH_ISSUER=\"https://{orgDomain}.oktapreview.com\" \n- CUSTOMER1_CLIENT_ID=\"agent0_client_id\" \n- CUSTOMER1_CLIENT_SECRET=\"agent0_client_secret\"\n\nIn the `env.todo` under `packages/authorization-server`, fill in the following info from your Okta dashboard. You can find the Add client id and secret from the Applications tab > Todo0 App > Sign On tab. \n\n// The enterprise IDP config for a customer CUSTOMER1_EMAIL_DOMAIN=\"tables.fake\"  \n- CUSTOMER1_AUTH_ISSUER=\"https://{orgDomain}.oktapreview.com\" \n- CUSTOMER1_CLIENT_ID=\"todo0_client_id\" \n- CUSTOMER1_CLIENT_SECRET=\"todo0_client_secret\"\n\nAdd your AWS credentials to the `.env` file under `packages/authorization-server`:\n\n- AWS_ACCESS_KEY_ID=\n- AWS_SECRET_ACCESS_KEY=\nOnce logged in test the following scenarios:\n\n1. Add a few tasks on your Todo0 app and check mark one as complete.\n2. Go back to your Agent0 app and add the prompt: `What's still on my plate?`\n\nNote: Here you are not prompted for consent for Agent0 to access your Todo0 app.\n\n3. Still at your Agent0 app add a new to do using the following prompt: \n`Add a new todo: ‘add your test todo task here.’`\n\n"
     },
     {
       "title": "Login with test user in incognito mode",
       "description": "Open an new window in incognitio mode and open both the Agent0 app and the Todo0 app. Login with the test user bob@tables.fake. A unique password is provided in your initial Okta org setup instructions."
-    },
-    {
-      "title": "Run project according to Readme instructions",
-      "description": "Once logged in test the following scenarios:\n\n1. Add a few tasks on your Todo0 app and check mark one as complete.\n2. Go back to your Agent0 app and add the prompt: `What's still on my plate?`\n\nNote: Here you are not prompted for consent for Agent0 to access your Todo0 app.\n\n3. Still at your Agent0 app add a new to do using the following prompt: \n`Add a new todo: ‘add your test todo task here.’`\n"
     }
   ],
   "ref": "oktane-lab"
