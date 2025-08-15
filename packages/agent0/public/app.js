@@ -61,8 +61,8 @@ class MCPClient {
 
         // Button elements
         this.refreshServers = document.getElementById('refreshServers');
-        this.getTools = document.getElementById('getTools');
-        this.clearHistory = document.getElementById('clearHistory');
+        this.getToolsBtn = document.getElementById('getTools');
+        this.clearHistoryBtn = document.getElementById('clearHistory');
         this.getHistory = document.getElementById('getHistory');
 
         // Modal elements
@@ -91,8 +91,8 @@ class MCPClient {
         // Sidebar functionality
         this.collapseSidebar.addEventListener('click', () => this.toggleSidebar());
         this.refreshServers.addEventListener('click', () => this.loadAvailableServers());
-        this.getTools.addEventListener('click', () => this.getTools());
-        this.clearHistory.addEventListener('click', () => this.clearHistory());
+        this.getToolsBtn.addEventListener('click', () => this.getTools());
+        this.clearHistoryBtn.addEventListener('click', () => this.clearHistory());
         this.getHistory.addEventListener('click', () => this.showHistory());
 
         // Modal functionality
