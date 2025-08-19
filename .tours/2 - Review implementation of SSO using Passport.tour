@@ -5,14 +5,32 @@
     {
       "title": "OIDC authentication flow",
       "file": "packages/agent0/src/server/controllers/oidc.ts",
-      "description": "Nothing to do here, just review how we get the ID token for ID-JAG exchange using [Passport](https://www.passportjs.org/). The ID token comes from the OpenID Connect authentication flow handled by the [passport-openidconnect library](https://www.passportjs.org/packages/passport-openidconnect/).",
-      "line": 130
+      "description": "Review how we get the ID token for ID-JAG exchange using [Passport](https://www.passportjs.org/). The ID token comes from the OpenID Connect authentication flow handled by the [passport-openidconnect library](https://www.passportjs.org/packages/passport-openidconnect/).\n\nThe `createStrategy` function configures the passport-openidconnect strategy. The ID token is automatically obtained through the OIDC flow. This strategy is configured with Okta as the identity provider (IdP) using environment variables for client credentials. ",
+      "selection": {
+        "start": {
+          "line": 130,
+          "character": 1
+        },
+        "end": {
+          "line": 143,
+          "character": 5
+        }
+      }
     },
     {
       "title": "Passport verify callback",
       "file": "packages/agent0/src/server/controllers/oidc.ts",
-      "description": "The passport-openidconnect strategy automatically passes the ID token to your verify callback. So the ID token comes from the successful OIDC authentication handled automatically by passport-openidconnect. It's the JSON Web Token (JWT) that contains the user's identity claims from the identity provider (Okta in this case).",
-      "line": 49
+      "description": "The passport-openidconnect strategy automatically passes the ID token to your verify callback. So the ID token comes from the successful OIDC authentication handled automatically by passport-openidconnect. It's the JSON Web Token (JWT) that contains the user's identity claims from the identity provider (Okta in this case).\n\nThe `verify` callback function extracts user information from teh profile and processes the external ID to get the auth server org key and user ID. This is where the application receives the authenticated user's data and ID token from Okta. ",
+      "selection": {
+        "start": {
+          "line": 49,
+          "character": 1
+        },
+        "end": {
+          "line": 58,
+          "character": 45
+        }
+      }
     },
     {
       "title": "Recap: The complete SSO/OIDC flow",

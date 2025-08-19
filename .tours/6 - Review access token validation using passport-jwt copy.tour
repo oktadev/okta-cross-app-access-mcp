@@ -5,36 +5,56 @@
     {
       "title": "MCP server makes API call",
       "file": "packages/agent0/src/mcp-server/todo-mcp-server.ts",
-      "description": "Nothing to do here but review how access tokens are validated in the Todo API that the MCP server calls.",
+      "description": "The MCP server includes the access token in the API requests and uses `Authorization: Bearer ${accessToken}` header to authenticate with the Todo API. ",
       "line": 352
     },
     {
       "title": "Express middleware chain",
       "file": "packages/todo0/src/server/main.ts",
-      "description": "Nothing to do here but review how access tokens are validated in the Todo API that the MCP server calls.",
+      "description": "This is the Express route configuration that applies the authentication middleware. `app.use('/api/todos', authenticated, todo)` means all `/api/todos` routes require authentication and the `authenticated` middleware runs before the `todo` controller.  ",
       "line": 83
     },
     {
       "title": "Authentication middleware",
       "file": "packages/todo0/src/server/main.ts",
-      "description": "Nothing to do here but review how access tokens are validated in the Todo API that the MCP server calls.",
+      "description": "The `authenticated` middleware function validates the JSON Web Tokens (JWTs). It uses Passport.js with JWT strategy for stateless (`session: false`) token validation. If the user is unauthenticated, it triggers the JWT strategy to validate the Bearer token.  ",
       "line": 69
     },
     {
       "title": "JWT strategy validation",
       "file": "packages/todo0/src/server/jwt/jwt-strategy.ts",
-      "description": "Nothing to do here but review how access tokens are validated in the Todo API that the MCP server calls.",
-      "line": 17
+      "description": "The validation process includes:\n1. Fetching public keys from JWKS endpoint (`${authServer}/jwks)\n2. Extracting the token from the Authorization header \n3. Validates issuer and audience claims\n4. Uses RS256 algorithm for signature verification\n5. Includes rate limiting and caching for JWKS requests",
+      "line": 30,
+      "selection": {
+        "start": {
+          "line": 17,
+          "character": 1
+        },
+        "end": {
+          "line": 30,
+          "character": 5
+        }
+      }
     },
     {
       "title": "Protected endpoint access",
       "file": "packages/todo0/src/server/controllers/todo.ts",
-      "description": "Nothing to do here but review how access tokens are validated in the Todo API that the MCP server calls.",
-      "line": 8
+      "description": "This is protected endpoint that requires authentication. It uses `req.user!.id` to access the authenticated user's ID to query the todos scoped only for the authenticated user. ",
+      "line": 20,
+      "selection": {
+        "start": {
+          "line": 8,
+          "character": 1
+        },
+        "end": {
+          "line": 20,
+          "character": 5
+        }
+      }
     },
     {
       "title": "Recap token validation steps",
-      "description": "Recap Token Validation Steps:\n\n1. Extract Bearer token from the Authorization header\n2. Fetch public key from authorization server's JWKS endpoint\n3. Verify JWT signature using RS256 algorithm\n4. Validate claims: issuer, audience, expiration\n5. Look up user in database using sub claim\n6. Authorize access to user-scoped resources\n\nThis implements proper JWT validation with public key cryptography, ensuring only tokens issued by the trusted authorization server can access the Todo API."
+      "description": "Recap Token Validation Steps:\n\n1. Extract Bearer token from the Authorization header\n2. Fetch public key from authorization server's JWKS endpoint\n3. Verify JWT signature using RS256 algorithm\n4. Validate claims: issuer, audience, expiration\n5. Look up user in database using sub claim\n6. Authorize access to user-scoped resources\n\nThis implements proper JWT validation with public key cryptography, ensuring only tokens issued by the trusted authorization server can access the Todo API. And user context is established for authentication. "
     }
   ],
   "ref": "oktane-lab"
