@@ -1,6 +1,6 @@
 {
   "$schema": "https://aka.ms/codetour-schema",
-  "title": "1 - Run current MCP server (with no auth)",
+  "title": "1 - Review current MCP server (with no auth)",
   "steps": [
     {
       "title": "Starting point",
