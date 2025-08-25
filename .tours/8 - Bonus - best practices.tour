@@ -1,10 +1,26 @@
 {
   "$schema": "https://aka.ms/codetour-schema",
-  "title": "8 - Bonus - best practices.tour",
+  "title": "8 - Bonus: Best practices for secure token handling.tour",
   "steps": [
     {
-      "title": "Best practices for secure token handling",
-      "description": "The current pattern is convenient for development but not production-ready due to token exposure risks. Consider implementing the best practices listed here.\n\n1. Token Proxy Pattern\n\n```ts\n// Instead of exposing raw tokens\nPOST /api/mcp/call-tool\n{\n\"serverName\": \"todo-mcp-server\",\n\"toolName\": \"list_todos\",\n\"args\": {}\n}\n// Server uses stored tokens internally, never exposes them\n```\n\n2. Short-lived Access Tokens\n```ts\n// Implement token refresh pattern\nif (isTokenExpired(accessToken)) {\naccessToken = await refreshAccessToken(refreshToken);\n}\n```\n\n3. Environment Variable Security\n\n```ts\n// Current: Environment variables can be read by child processes\n\nenv: { ACCESS_TOKEN: accessToken }\n\n// Better: Use secure token injection or inter-process communication\n```\n\n4. Implement HTTPS + Security Headers\n\n```ts\napp.use(helmet()); // Security headers\napp.use(express.json({ limit: '10mb' })); // Ensure HTTPS in production\n```\n\n5. Implement Okta's [Universal Logout (based on the OAuth spec Global Token Revocation)](https://help.okta.com/oie/en-us/content/topics/itp/universal-logout.htm) along with OIDC/SSO, these feature are not optional but a hard requirements to implementing Cross-App Access.\n"
+      "title": "Token Proxy Pattern",
+      "description": "The current pattern is convenient for development but not production-ready due to token exposure risks. Consider implementing the best practices listed here.\n\n1. Token Proxy Pattern\n\n```ts\n// Instead of exposing raw tokens\nPOST /api/mcp/call-tool\n{\n\"serverName\": \"todo-mcp-server\",\n\"toolName\": \"list_todos\",\n\"args\": {}\n}\n// Server uses stored tokens internally, never exposes them\n```"
+    },
+    {
+      "title": "Short-lived Access Tokens",
+      "description": "2. Short-lived Access Tokens\n```ts\n// Implement token refresh pattern\nif (isTokenExpired(accessToken)) {\naccessToken = await refreshAccessToken(refreshToken);\n}\n```"
+    },
+    {
+      "title": "Environment Variable Security",
+      "description": "3. Environment Variable Security\n\n```ts\n// Current: Environment variables can be read by child processes\n\nenv: { ACCESS_TOKEN: accessToken }\n\n// Better: Use secure token injection or inter-process communication\n```"
+    },
+    {
+      "title": "Implement HTTPS + Security Headers",
+      "description": "4. Implement HTTPS + Security Headers\n\n```ts\napp.use(helmet()); // Security headers\napp.use(express.json({ limit: '10mb' })); // Ensure HTTPS in production\n```"
+    },
+    {
+      "title": "Implement Universal Logout",
+      "description": "5. Implement Okta's [Universal Logout (based on the OAuth spec Global Token Revocation)](https://help.okta.com/oie/en-us/content/topics/itp/universal-logout.htm) along with OIDC/SSO, these feature are not optional but a hard requirements to implementing Cross-App Access.\n"
     }
   ],
   "ref": "oktane-lab"

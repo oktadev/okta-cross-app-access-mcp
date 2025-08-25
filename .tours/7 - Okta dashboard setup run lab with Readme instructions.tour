@@ -4,7 +4,25 @@
   "steps": [
     {
       "title": "Run project according to Readme instructions",
-      "description": "Troubleshooting tips:\n\nBe sure to run `yarn install` if you don't already have yarn.\n\nSecure credentials setup:\n\nLook for the following files `.env.agent`, `.env.todo`, `.env` to add your Okta credentials. These files will listed under gitignore and will not be commited to your GitHub repo.\n\nAfter running `yarn:setup` you should get a file called `.env.agent` under `packages/authorization-server`. Fill in the following info from your Okta dashboard. \n\n// The enterprise IDP config for a customer CUSTOMER1_EMAIL_DOMAIN=\"tables.fake\" \n- CUSTOMER1_AUTH_ISSUER=\"https://{orgDomain}.oktapreview.com\" \n- CUSTOMER1_CLIENT_ID=\"agent0_client_id\" \n- CUSTOMER1_CLIENT_SECRET=\"agent0_client_secret\"\n\n1. From the Okta Admin console, go to Applications > Applications.\n2. Select Agent0 App.\n3. Select the Sign On tab.\n4. Find the app client id and secret\n\nIn the `env.todo` under `packages/authorization-server`, fill in the following info from your Okta dashboard.\n\n// The enterprise IDP config for a customer CUSTOMER1_EMAIL_DOMAIN=\"tables.fake\"  \n- CUSTOMER1_AUTH_ISSUER=\"https://{orgDomain}.oktapreview.com\" \n- CUSTOMER1_CLIENT_ID=\"todo0_client_id\" \n- CUSTOMER1_CLIENT_SECRET=\"todo0_client_secret\"\n\n1. From the Okta Admin console, go to Applications > Applications.\n2. Select Todo0 App.\n3. Select the Sign On tab.\n4. Find the app client id and secret\n\nAdd your AWS credentials to the `.env` file under `packages/authorization-server`:\n\n- AWS_ACCESS_KEY_ID=\n- AWS_SECRET_ACCESS_KEY=\nOnce logged in test the following scenarios:\n\n1. Add a few tasks on your Todo0 app and check mark one as complete.\n2. Go back to your Agent0 app and add the prompt: `What's still on my plate?`\n\nNote: Here you are not prompted for consent for Agent0 to access your Todo0 app.\n\n3. Still at your Agent0 app add a new to do using the following prompt: \n`Add a new todo: ‘add your test todo task here.’`\n\n"
+      "description": "Troubleshooting tips:\n\nSecure credentials setup:\n\nLook for the following files `.env.agent`, `.env.todo`, `.env` to add your Okta credentials. These files will listed under gitignore and will not be commited to your GitHub repo. Proceed to running the sample app according to the [main branch Readme instructions](https://github.com/oktadev/okta-cross-app-access-mcp/tree/main). \n\nOnce logged in via test user Bob test the following scenarios:\n\n1. Add a few tasks on your Todo0 app and check mark one as complete.\n2. Go back to your Agent0 app and add the prompt: `What's still on my plate?`\n\nNote: Here you are not prompted for consent for Agent0 to access your Todo0 app.\n\n3. Still at your Agent0 app add a new to do using the following prompt: \n`Add a new todo: ‘add your test todo task here.’`\n\n"
+    },
+    {
+      "title": "Add AWS credentials",
+      "file": "packages/agent0/.env",
+      "description": "Paste your own AWS credentials below. You can find them in your AWS IAM console.",
+      "line": 25
+    },
+    {
+      "title": "Add Todo0 credentials",
+      "file": "packages/authorization-server/.env.todo",
+      "description": "1. From the Okta Admin console, go to Applications > Applications.\n2. Select Todo0 App.\n3. Select the Sign On tab.\n4. Find the app client id and secret",
+      "line": 18
+    },
+    {
+      "title": "Add Agent0 credentials",
+      "file": "packages/authorization-server/.env.agent",
+      "description": "1. From the Okta Admin console, go to Applications > Applications.\n2. Select Agent0 App.\n3. Select the Sign On tab.\n4. Find the app client id and secret",
+      "line": 18
     },
     {
       "title": "Login with test user in incognito mode",
