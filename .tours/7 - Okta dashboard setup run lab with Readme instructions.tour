@@ -7,16 +7,16 @@
       "description": "Troubleshooting tips:\n\nSecure credentials setup:\n\nLook for the following files `.env.agent`, `.env.todo`, `.env` to add your Okta credentials. These files will listed under gitignore and will not be commited to your GitHub repo. Proceed to running the sample app according to the [main branch Readme instructions](https://github.com/oktadev/okta-cross-app-access-mcp/tree/main). \n\nOnce logged in via test user Bob test the following scenarios:\n\n1. Add a few tasks on your Todo0 app and check mark one as complete.\n2. Go back to your Agent0 app and add the prompt: `What's still on my plate?`\n\nNote: Here you are not prompted for consent for Agent0 to access your Todo0 app.\n\n3. Still at your Agent0 app add a new to do using the following prompt: \n`Add a new todo: ‘add your test todo task here.’`\n\n"
     },
     {
-      "title": "Add AWS credentials",
-      "file": "packages/agent0/.env",
-      "description": "Paste your own AWS credentials below. You can find them in your AWS IAM console.",
+      "title": "Add Agent0 credentials",
+      "file": "packages/authorization-server/.env.agent",
+      "description": "1. From the Okta Admin console, go to Applications > Applications.\n2. Select Agent0 App.\n3. Select the Sign On tab.\n4. Find the app client id and secret",
       "selection": {
         "start": {
-          "line": 25,
+          "line": 18,
           "character": 1
         },
         "end": {
-          "line": 27,
+          "line": 22,
           "character": 30
         }
       }
@@ -37,16 +37,16 @@
       }
     },
     {
-      "title": "Add Agent0 credentials",
-      "file": "packages/authorization-server/.env.agent",
-      "description": "1. From the Okta Admin console, go to Applications > Applications.\n2. Select Agent0 App.\n3. Select the Sign On tab.\n4. Find the app client id and secret",
+      "title": "Add AWS credentials",
+      "file": "packages/agent0/.env",
+      "description": "Paste your own AWS credentials below. You can find them in your AWS IAM console.",
       "selection": {
         "start": {
-          "line": 18,
+          "line": 25,
           "character": 1
         },
         "end": {
-          "line": 22,
+          "line": 27,
           "character": 30
         }
       }
