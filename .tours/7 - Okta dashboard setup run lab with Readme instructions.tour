@@ -12,11 +12,11 @@
       "description": "1. From the Okta Admin console, go to Applications > Applications.\n2. Select Agent0 App.\n3. Select the Sign On tab.\n4. Find the app client id and secret",
       "selection": {
         "start": {
-          "line": 18,
+          "line": 20,
           "character": 1
         },
         "end": {
-          "line": 22,
+          "line": 24,
           "character": 30
         }
       }
@@ -46,7 +46,7 @@
           "character": 1
         },
         "end": {
-          "line": 27,
+          "line": 31,
           "character": 30
         }
       }

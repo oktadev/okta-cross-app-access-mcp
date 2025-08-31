@@ -6,7 +6,16 @@
       "title": "MCP server makes API call",
       "file": "packages/agent0/src/mcp-server/todo-mcp-server.ts",
       "description": "The MCP server includes the access token in the API requests and uses `Authorization: Bearer ${accessToken}` header to authenticate with the Todo API. ",
-      "line": 352
+      "selection": {
+        "start": {
+          "line": 352,
+          "character": 1
+        },
+        "end": {
+          "line": 359,
+          "character": 100
+        }
+      }
     },
     {
       "title": "Express middleware chain",
