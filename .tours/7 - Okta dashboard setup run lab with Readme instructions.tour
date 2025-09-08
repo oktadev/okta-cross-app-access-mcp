@@ -1,11 +1,7 @@
 {
   "$schema": "https://aka.ms/codetour-schema",
-  "title": "7 - Okta dashboard setup run lab with Readme instructions",
+  "title": "8 - Okta dashboard setup run lab with Readme instructions",
   "steps": [
-    {
-      "title": "Run project according to Readme instructions",
-      "description": "Troubleshooting tips:\n\nSecure credentials setup:\n\nLook for the following files `.env.agent`, `.env.todo`, `.env` to add your Okta credentials. These files will listed under gitignore and will not be commited to your GitHub repo. Proceed to running the sample app according to the [main branch Readme instructions](https://github.com/oktadev/okta-cross-app-access-mcp/tree/main). \n\nOnce logged in via test user Bob test the following scenarios:\n\n1. Add a few tasks on your Todo0 app and check mark one as complete.\n2. Go back to your Agent0 app and add the prompt: `What's still on my plate?`\n\nNote: Here you are not prompted for consent for Agent0 to access your Todo0 app.\n\n3. Still at your Agent0 app add a new to do using the following prompt: \n`Add a new todo: ‘add your test todo task here.’`\n\n"
-    },
     {
       "title": "Add Agent0 credentials",
       "file": "packages/authorization-server/.env.agent",
@@ -52,8 +48,8 @@
       }
     },
     {
-      "title": "Login with test user in incognito mode",
-      "description": "Open an new window in incognitio mode and open both the Agent0 app and the Todo0 app. Login with the test user bob@tables.fake. A unique password is provided in your initial Okta org setup instructions."
+      "title": "Run project and log in with test user",
+      "description": "After adding the necessary credentials run `build: agent0` to rebuild the project with your env credentials and finally `yarn start`.\n\nLog in via test user Bob Test under incognito mode and test the following scenarios:\n\n1. Add a few tasks on your Todo0 app and check mark one as complete.\n2. Go back to your Agent0 app and add the prompt: `What's still on my plate?`\n\nNote: Here you are not prompted for consent for Agent0 to access your Todo0 app. This is the goal of XAA.\n\n3. Still at your Agent0 app add a new to do using the following prompt: \n`Add a new todo: ‘add your test todo task here.’`\n"
     }
   ],
   "ref": "oktane-lab"

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "0: Sign in to your Okta training org",
+ "nextTour": "",
+  "steps": [
+    {
+      "title": "Sign in to your Okta training org",
+      "description": "## Sign in to your Okta training org\n\n1. From the lab session in Okta Learning, select **Get Started**.\n1. Select **Show Credentials** to display the credentials for your Okta training org.\n1. Sign in to the Okta training org using two-factor authentication.\n    -  Open the Okta training org URL in a browser window.\n    - Enter the username and password for the admin account.\n    - Set up Okta Verify for the admin account.\n        - For Okta Verify, select **Set up**.\n        - If a message appears to open Okta Verify, select **Cancel**.\n        - Select the **set up Okta Verify on a mobile device** link.\n        - Follow the steps on the page to set up Okta Verify.\n        > **Tip**: From Okta Verify on your mobile device, select **+** to add an account and choose the **Organization** account type.\n\n1. Access the Admin Console.\n    > **Note**: This user has Super Administrator permissions.\n    - From the End-User Dashboard, select **Admin**.\n    - Verify that you are signed in to the Admin Console.\n\n> **Important**: The Okta training org includes additional users for testing. The password for each user in the org is the same as the admin account password.\n"
+    }
+  ]
+}

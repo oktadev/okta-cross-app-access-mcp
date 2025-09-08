@@ -1,6 +1,6 @@
 {
   "$schema": "https://aka.ms/codetour-schema",
-  "title": "6 - Review access token validation using passport-jwt",
+  "title": "7 - Review access token validation using passport-jwt",
   "steps": [
     {
       "title": "MCP server makes API call",

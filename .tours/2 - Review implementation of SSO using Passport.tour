@@ -1,6 +1,6 @@
 {
   "$schema": "https://aka.ms/codetour-schema",
-  "title": "2 - Review implementation of SSO using Passport",
+  "title": "3 - Review implementation of SSO using Passport",
   "steps": [
     {
       "title": "OIDC authentication flow",

@@ -1,6 +1,6 @@
 {
   "$schema": "https://aka.ms/codetour-schema",
-  "title": "4 - Implement database token storage",
+  "title": "5 - Implement database token storage",
   "steps": [
     {
       "title": "Store the access token in the database",
