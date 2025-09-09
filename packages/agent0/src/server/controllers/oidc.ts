@@ -112,8 +112,8 @@ const verify = async (
     }
   }
 
-  // For all resources, do this flow
-  // Add code here to request an authorization grant token from the Identity Provider (IdP)
+// For all resources, do this flow
+// Add code here to request an authorization grant token from the Identity Provider (IdP)
 
 
 // Add code here to exchange the authorization grant token for an access token from the resource server (TODO Authorization Server)

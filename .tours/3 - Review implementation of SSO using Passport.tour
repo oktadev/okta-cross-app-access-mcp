@@ -34,7 +34,7 @@
     },
     {
       "title": "Recap: The complete SSO/OIDC flow",
-      "description": "1. User starts login: /api/openid/start/user@example.com\n2. Redirect to Identity Provider (IdP): User redirected to Okta/OAuth server for authentication\n3. User authenticates: Enters credentials at IdP\n4. IdP callback: IdP redirects back to /api/openid/callback/ with authorization code\n5. Token exchange: passport-openidconnect exchanges authorization code for tokens (access token, ID token)\n6. Verify callback: Passport calls your verify() function with the ID token\n\nNow let's use ID token to call requestIdJwtAuthzGrant() in the next step."
+      "description": "Here is a recap of the complete SSO/OIDC flow:\n\n1. User starts login: `/api/openid/start/user@example.com`\n2. Redirect to Identity Provider (IdP): User redirected to Okta/OAuth server for authentication\n3. User authenticates: Enters credentials at IdP\n4. IdP callback: IdP redirects back to `/api/openid/callback/` with authorization code\n5. Token exchange: passport-openidconnect exchanges authorization code for tokens (access token, ID token)\n6. Verify callback: Passport calls your verify() function with the ID token\n\nNow let's use ID token to call requestIdJwtAuthzGrant() in the next step."
     }
   ],
   "ref": "oktane-lab"

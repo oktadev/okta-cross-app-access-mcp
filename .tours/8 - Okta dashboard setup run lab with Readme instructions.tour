@@ -1,11 +1,11 @@
 {
   "$schema": "https://aka.ms/codetour-schema",
-  "title": "8 - Okta dashboard setup run lab with Readme instructions",
+  "title": "8 - Okta dashboard setup run lab with README instructions",
   "steps": [
     {
       "title": "Add Agent0 credentials",
       "file": "packages/authorization-server/.env.agent",
-      "description": "1. From the Okta Admin console, go to Applications > Applications.\n2. Select Agent0 App.\n3. Select the Sign On tab.\n4. Find the app client id and secret",
+      "description": "1. From the Okta Admin console, go to Applications > Applications.\n2. Select Agent0 App.\n3. Select the Sign On tab.\n4. Find the app client id and secret\n5. Your auth issuer is your Oktapreview org for example https://oktaice001234.oktapreview.com/\n6. Save changes to the file",
       "selection": {
         "start": {
           "line": 20,
@@ -20,7 +20,7 @@
     {
       "title": "Add Todo0 credentials",
       "file": "packages/authorization-server/.env.todo",
-      "description": "1. From the Okta Admin console, go to Applications > Applications.\n2. Select Todo0 App.\n3. Select the Sign On tab.\n4. Find the app client id and secret",
+      "description": "1. From the Okta Admin console, go to Applications > Applications.\n2. Select Todo0 App.\n3. Select the Sign On tab.\n4. Find the app client id and secret\n5. Your auth issuer is your Oktapreview org for example https://oktaice001234.oktapreview.com/\n6. Save changes to the file",
       "selection": {
         "start": {
           "line": 18,
@@ -28,7 +28,7 @@
         },
         "end": {
           "line": 22,
-          "character": 30
+          "character": 28
         }
       }
     },
@@ -49,7 +49,17 @@
     },
     {
       "title": "Run project and log in with test user",
-      "description": "After adding the necessary credentials run `build: agent0` to rebuild the project with your env credentials and finally `yarn start`.\n\nLog in via test user Bob Test under incognito mode and test the following scenarios:\n\n1. Add a few tasks on your Todo0 app and check mark one as complete.\n2. Go back to your Agent0 app and add the prompt: `What's still on my plate?`\n\nNote: Here you are not prompted for consent for Agent0 to access your Todo0 app. This is the goal of XAA.\n\n3. Still at your Agent0 app add a new to do using the following prompt: \n`Add a new todo: ‘add your test todo task here.’`\n"
+      "description": "After adding the necessary credentials:\n\n1. Enter the command `yarn bootstrap` in the terminal to seed the database with your test user. \n\n**Note**: The yarn bootstrap command will also run yarn resetdb to initialize your databases. During this process, you’ll see a prompt:\n\nAre you sure you want to reset your database? All data will be lost.\n\nType y and press Enter to reset and re-seed the databases.\nThis is required the first time you run the project, or whenever you want to start with clean test data.\n\n2. Next in the terminal enter the command `yarn build:agent0` to rebuild the project with your env credentials and finally enter the command `yarn start`.\n\n3. Open the following apps in incognito mode:\n\n- Todo app - http://localhost:3001\n- Agent0 - http://localhost:3000\n\n4. In the Todo app log in as user **bob@tables.fake** and add a few tasks in the app and check mark one of them as complete.\n\n5. Go back to the Agent0 app, select Model Claude 3.7 Sonnet and login in as user **bob@tables.fake** to test the following scenarios:\n\n- a. Add the prompt: `What's still on my plate?` (to get your list of tasks accomplished)\n\n**Note**: Here you are not prompted for consent for Agent0 to access your Todo0 app. This is the goal of XAA.\n\n- b. Still at your Agent0 app add a new todo using the following prompt: \n`Add a new todo: ‘add your test todo task here.’` (see a new task get added to the todo list)\n\n**Troubleshooting Tips**: \nIf you encounter any issue refer to the [README page](https://github.com/oktadev/okta-cross-app-access-mcp) of the main repo branch.",
+      "selection": {
+        "start": {
+          "line": 18,
+          "character": 22
+        },
+        "end": {
+          "line": 18,
+          "character": 36
+        }
+      }
     }
   ],
   "ref": "oktane-lab"
