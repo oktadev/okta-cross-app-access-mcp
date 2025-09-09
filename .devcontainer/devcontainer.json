@@ -9,9 +9,7 @@
   // "features": {},
   // Configure tool-specific properties.
   "customizations": {
-    // Configure properties specific to VS Code.
     "vscode": {
-      // Add the IDs of extensions you want installed when the container is created.
       "extensions": [
         "Orta.vscode-jest",
         "Gruntfuggly.todo-tree",
@@ -36,28 +34,30 @@
           "source.fixAll.eslint": "never"
         },
         "editor.formatOnSave": true,
+        /* <-- important: override a missing default formatter so VS Code won't prompt */
+        "editor.defaultFormatter": null,
+        /* per-language explicit overrides (optional but safe) */
+        "[json]": {
+          "editor.formatOnSave": true,
+          "editor.defaultFormatter": null
+        },
+        "[javascript]": {
+          "editor.formatOnSave": true,
+          "editor.defaultFormatter": null
+        },
+        "[typescript]": {
+          "editor.formatOnSave": true,
+          "editor.defaultFormatter": null
+        },
+        "[html]": {
+          "editor.formatOnSave": true,
+          "editor.defaultFormatter": null
+        },
         "typescript.format.semicolons": "insert",
         "todo-tree.tree.showCountsInTree": true,
         "todo-tree.general.showActivityBarBadge": true,
         "comments.maxHeight": false,
         "editor.minimap.enabled": false,
-        // Enable per-language
-        "[json]": {
-          "editor.formatOnSave": true
-          // "editor.defaultFormatter": "esbenp.prettier-vscode"
-        },
-        "[javascript]": {
-          "editor.formatOnSave": true
-          // "editor.defaultFormatter": "esbenp.prettier-vscode"
-        },
-        "[typescript]": {
-          "editor.formatOnSave": true
-          // "editor.defaultFormatter": "esbenp.prettier-vscode"
-        },
-        "[html]": {
-          "editor.formatOnSave": true
-          // "editor.defaultFormatter": "esbenp.prettier-vscode"
-        },
         "workbench.sideBar.location": "left",
         "codetour.promptForWorkspaceTours": false,
         "codetour.showMarkers": false,
