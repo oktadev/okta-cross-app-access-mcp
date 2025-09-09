@@ -1,7 +1,7 @@
 {
   "$schema": "https://aka.ms/codetour-schema",
-  "title": "0: Sign in to your Okta training org",
- "nextTour": "",
+  "title": "0 - Sign in to your Okta training org",
+  "nextTour": "1 - Dev Lab: MCP + Cross-App Access",
   "steps": [
     {
       "title": "Sign in to your Okta training org",
