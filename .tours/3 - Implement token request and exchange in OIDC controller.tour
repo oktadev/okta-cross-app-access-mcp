@@ -10,33 +10,13 @@
       "title": "Request an authorization grant token from the Identity Provider (IdP)",
       "file": "packages/agent0/src/server/controllers/oidc.ts",
       "description": "Insert the following code and save the file:\n\n```ts\nlet authGrantResponse: ExchangeTokenResult;\n\n  try {\n    authGrantResponse = await requestIdJwtAuthzGrant({\n      tokenUrl: `${process.env.AUTH_SERVER}/token`,\n      audience: process.env.TODO_AUTH_SERVER!,\n      subjectToken: idToken.toString(),\n      // This is hardcoded to what we use for Okta.\n      // TODO: Should be using cached value from where we got the id token\n      subjectTokenType: 'oidc',\n      scopes: ['read', 'write'], // Can be undefined, will default to empty string\n      clientID: process.env.CLIENT1_CLIENT_ID!,\n      clientSecret: process.env.CLIENT1_CLIENT_SECRET!,\n    });\n  } catch (error: unknown) {\n    // Errors if there was an issue making the request or parsing the response.\n    console.log('Failed to obtain authorization grant', { error });\n\n    done(null, user);\n    return;\n  }\n\n  if ('error' in authGrantResponse) {\n    console.log('Failed to obtain authorization grant', {\n      error: authGrantResponse.error,\n    });\n\n    done(null, user);\n    return;\n  }\n```\n  ",
-      "line": 117,
-      "selection": {
-        "start": {
-          "line": 1,
-          "character": 35
-        },
-        "end": {
-          "line": 1,
-          "character": 53
-        }
-      }
+      "line": 117
     },
     {
       "title": "Exchange the authorization grant token for an access token with the resource server",
       "file": "packages/agent0/src/server/controllers/oidc.ts",
       "description": "Exchange the authorization grant token for an access token from the resource server (TODO Authorization Server). Insert the following code and save the file:\n\n```ts\nconst { payload: authGrantToken } = authGrantResponse;\n\n  let accessTokenResponse: AccessTokenResult;\n  console.log('here', authGrantToken.access_token);\n  try {\n    accessTokenResponse = await exchangeIdJwtAuthzGrant({\n      tokenUrl: `${process.env.TODO_AUTH_SERVER}/token`,\n      authorizationGrant: authGrantToken.access_token,\n      scopes: ['read', 'write'],\n      clientID: process.env.CLIENT2_CLIENT_ID!,\n      clientSecret: process.env.CLIENT2_CLIENT_SECRET,\n    });\n  } catch (error: unknown) {\n    // Errors if there was an issue making the request or parsing the response.\n    console.log('Failed to exchange the authorization grant', {\n      error,\n    });\n\n    done(null, user);\n    return;\n  }\n\n  if ('error' in accessTokenResponse) {\n    console.log('Failed to exchange authorization grant for access token', {\n      error: accessTokenResponse.error,\n    });\n\n    done(null, user);\n    return;\n  }\n```",
-      "line": 149,
-      "selection": {
-        "start": {
-          "line": 1,
-          "character": 114
-        },
-        "end": {
-          "line": 1,
-          "character": 158
-        }
-      }
+      "line": 149
     }
   ],
   "ref": "oktane-lab"
