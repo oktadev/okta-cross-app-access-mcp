@@ -41,28 +41,28 @@
         "todo-tree.general.showActivityBarBadge": true,
         "comments.maxHeight": false,
         "editor.minimap.enabled": false,
-          // Enable per-language
+        // Enable per-language
         "[json]": {
-          "editor.formatOnSave": true,
+          "editor.formatOnSave": true
           // "editor.defaultFormatter": "esbenp.prettier-vscode"
         },
         "[javascript]": {
-          "editor.formatOnSave": true,
+          "editor.formatOnSave": true
           // "editor.defaultFormatter": "esbenp.prettier-vscode"
         },
         "[typescript]": {
-          "editor.formatOnSave": true,
+          "editor.formatOnSave": true
           // "editor.defaultFormatter": "esbenp.prettier-vscode"
         },
         "[html]": {
-          "editor.formatOnSave": true,
+          "editor.formatOnSave": true
           // "editor.defaultFormatter": "esbenp.prettier-vscode"
         },
-        "workbench.sideBar.location": "right",
+        "workbench.sideBar.location": "left",
         "codetour.promptForWorkspaceTours": false,
         "codetour.showMarkers": false,
         "codetour.customTourDirectory": ".auth0/lab/guides"
-            }
+      }
     }
   },
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
