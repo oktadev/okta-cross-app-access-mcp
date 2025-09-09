@@ -16,7 +16,7 @@
         "Orta.vscode-jest",
         "Gruntfuggly.todo-tree",
         "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode",
+        // "esbenp.prettier-vscode",
         "editorconfig.editorconfig",
         "marclipovsky.string-manipulation",
         "Tyriar.sort-lines",
@@ -44,19 +44,19 @@
           // Enable per-language
         "[json]": {
           "editor.formatOnSave": true,
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
+          // "editor.defaultFormatter": "esbenp.prettier-vscode"
         },
         "[javascript]": {
           "editor.formatOnSave": true,
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
+          // "editor.defaultFormatter": "esbenp.prettier-vscode"
         },
         "[typescript]": {
           "editor.formatOnSave": true,
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
+          // "editor.defaultFormatter": "esbenp.prettier-vscode"
         },
         "[html]": {
           "editor.formatOnSave": true,
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
+          // "editor.defaultFormatter": "esbenp.prettier-vscode"
         },
         "workbench.sideBar.location": "right",
         "codetour.promptForWorkspaceTours": false,
