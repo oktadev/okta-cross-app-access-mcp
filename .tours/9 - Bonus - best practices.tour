@@ -1,6 +1,7 @@
 {
   "$schema": "https://aka.ms/codetour-schema",
   "title": "9 - Bonus: Best practices for secure token handling.tour",
+  "nextTour": "Lab complete and next steps!",
   "steps": [
     {
       "title": "Token Proxy Pattern",
