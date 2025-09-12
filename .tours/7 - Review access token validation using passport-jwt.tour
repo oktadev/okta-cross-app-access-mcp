@@ -48,7 +48,7 @@
     {
       "title": "Protected endpoint access",
       "file": "packages/todo0/src/server/controllers/todo.ts",
-      "description": "As highlighted here this is protected endpoint that requires authentication. It uses `req.user!.id` to access the authenticated user's ID to query the todos scoped only for the authenticated user. ",
+      "description": "As highlighted here, this is a protected endpoint that requires authentication. It uses `req.user!.id` to access the authenticated user's ID to query the todos scoped only for the authenticated user. ",
       "line": 20,
       "selection": {
         "start": {
@@ -63,7 +63,7 @@
     },
     {
       "title": "Recap token validation steps",
-      "description": "Here is a recap of the complete token validation steps:\n\n1. Extract Bearer token from the Authorization header\n2. Fetch public key from authorization server's JWKS endpoint\n3. Verify JWT signature using RS256 algorithm\n4. Validate claims: issuer, audience, expiration\n5. Look up user in database using sub claim\n6. Authorize access to user-scoped resources\n\nThis implements proper JWT validation with public key cryptography, ensuring only tokens issued by the trusted authorization server can access the Todo API. And user context is established for authentication. "
+      "description": "Here is a recap of the complete token validation step-by-step:\n\n1. Extract Bearer token from the Authorization header\n2. Fetch public key from authorization server's JWKS endpoint\n3. Verify JWT signature using RS256 algorithm\n4. Validate claims: issuer, audience, expiration\n5. Look up user in database using sub claim\n6. Authorize access to user-scoped resources\n\nThis implements proper JWT validation with public key cryptography, ensuring only tokens issued by the trusted authorization server can access the Todo API. And user context is established for authentication. "
     }
   ],
   "ref": "oktane-lab"

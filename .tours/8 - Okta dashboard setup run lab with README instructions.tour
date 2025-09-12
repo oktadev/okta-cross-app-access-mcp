@@ -1,0 +1,56 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "8 - Okta dashboard setup run lab with README instructions",
+  "steps": [
+    {
+      "title": "Add Agent0 credentials",
+      "file": "packages/authorization-server/.env.agent",
+      "description": "1. From the Okta Admin console, go to Applications > Applications.\n2. Select Agent0 App.\n3. Select the Sign On tab.\n4. Find the app client id and secret\n5. Your auth issuer is your Oktapreview org for example `https://oktaice001234.oktapreview.com` \n>(**Note**: You can find the org URL in the credentials tab of your lab portal webpage.)\n6. Save changes to the file\n\n>**Warning**: Do **NOT** include a slash at the end of the org URL. Request to authorize to the Okta IdP is match case sensitive; you'll end up with a forbidden error otherwise.",
+      "selection": {
+        "start": {
+          "line": 20,
+          "character": 1
+        },
+        "end": {
+          "line": 24,
+          "character": 30
+        }
+      }
+    },
+    {
+      "title": "Add Todo0 credentials",
+      "file": "packages/authorization-server/.env.todo",
+      "description": "1. From the Okta Admin console, go to Applications > Applications.\n2. Select Todo0 App.\n3. Select the Sign On tab.\n4. Find the app client id and secret\n5. Your auth issuer is your Oktapreview org for example `https://oktaice001234.oktapreview.com`\n>(**Note**: You can find the org URL in the credentials tab of your lab portal webpage.)\n6. Save changes to the file\n\n>**Warning**: Do **NOT** include a slash at the end of the org URL. Request to authorize to the Okta IdP is match case sensitive; you'll end up with a forbidden error otherwise.",
+      "selection": {
+        "start": {
+          "line": 18,
+          "character": 1
+        },
+        "end": {
+          "line": 22,
+          "character": 177
+        }
+      }
+    },
+    {
+      "title": "Add AWS credentials",
+      "file": "packages/agent0/.env",
+      "description": "Paste your AWS credentials which you can find in the credentials tab of your lab portal webpage.",
+      "selection": {
+        "start": {
+          "line": 25,
+          "character": 1
+        },
+        "end": {
+          "line": 30,
+          "character": 97
+        }
+      }
+    },
+    {
+      "title": "Run project and log in with test user",
+      "description": "Click [here](command:workbench.action.files.saveAll) to ensure all the changes you’ve made thus far are saved. After saving, proceeding with the following steps. \n\n1. Click [here](command:codetour.sendTextToTerminal?[\"yarn bootstrap\"]) to run the command `yarn bootstrap` in the terminal to seed the database with your test user. \n\n>**Note**: The yarn bootstrap command will also run yarn resetdb to initialize your databases. During this process, you’ll see a prompt:\n\nAre you sure you want to reset your database? All data will be lost.\n\nType y and press Enter to reset and re-seed the databases.\nThis is required the first time you run the project, or whenever you want to start with clean test data.\n\n2. Click [here](command:codetour.sendTextToTerminal?[\"yarn build:agent0\"]) to run the command `yarn build:agent0` in the terminal to rebuild the project with your env credentials and finally click [here](command:codetour.sendTextToTerminal?[\"yarn build:agent0\"]) to run the command `yarn start` to start the project.\n\n3. Open the following apps in incognito mode:\n    - Todo app - http://localhost:3001\n    - Agent0 - http://localhost:3000\n\n4. In the Todo app log in as test user **bob@tables.fake** using the same password as your Okta Admin account (`okta.training@okta.com`) in your credentials panel. \n    - Set up Okta Verify for the test user account.\n        - For Okta Verify, select **Set up**.\n        - If a message appears to open Okta Verify, select **Cancel**.\n        - Select the **set up Okta Verify on a mobile device** link.\n        - Follow the steps on the page to set up Okta Verify.\n        > **Tip**: From Okta Verify on your mobile device, select **+** to add an account and choose the **Organization** account type.\n\n    - After logging in, add a few tasks in the app and check mark one of them as complete.\n\n5. Switch to the browser tab where you opened the Agent0 app.  \n6. Select the Model **Claude 3.7 Sonnet** and select the **Initialize** button. \n7. Select the **Connect to IdP** button. \n8. Login in as test user **bob@tables.fake** to test the following scenarios:\n\n    - a. Add the prompt: `What's still on my plate?` (to get your list of tasks accomplished)\n\n    - >**Note**: Here you are not prompted for consent for Agent0 to access your Todo0 app. This is the goal of XAA: to allievate the burden and responsibility of evaluating secure policies/permissions to the admin (via the IdP) away from the individual user. \n    \n    - b. Still at your Agent0 app add a new todo using the following prompt: `Add a new todo: ‘add your test todo task here.’` (see a new task get added to the todo list)\n\n> **Troubleshooting Tips**: \nFor reference on the yarn commands above please refer to this [README page](https://github.com/oktadev/okta-cross-app-access-mcp) of the main repo branch. If you encounter any trouble, try re-authenticating to both applications by signing out and signing in again. There isn't button to sign out of Agent0, so manually log out by opening a new browser if needed. Also make sure that Agent0 is connected to the Todo MCP Server by clicking on the `Refresh Available Servers` button, otherwise Agent0 will have no context about your todo list and will tell you so."
+    }
+  ],
+  "ref": "oktane-lab"
+}
