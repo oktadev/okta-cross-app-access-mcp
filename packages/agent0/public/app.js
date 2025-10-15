@@ -47,6 +47,11 @@ class MCPClient {
         this.initializeBtn = document.getElementById('initializeBtn');
         this.connectIdpBtn = document.getElementById('connectIdpBtn');
 
+        // User info elements
+        this.userInfo = document.getElementById('userInfo');
+        this.userEmail = document.getElementById('userEmail');
+        this.logoutBtn = document.getElementById('logoutBtn');
+
         // Chat elements
         this.messages = document.getElementById('messages');
         this.messageInput = document.getElementById('messageInput');
@@ -61,8 +66,8 @@ class MCPClient {
 
         // Button elements
         this.refreshServers = document.getElementById('refreshServers');
-        this.getTools = document.getElementById('getTools');
-        this.clearHistory = document.getElementById('clearHistory');
+        this.getToolsBtn = document.getElementById('getTools');
+        this.clearHistoryBtn = document.getElementById('clearHistory');
         this.getHistory = document.getElementById('getHistory');
 
         // Modal elements
@@ -75,6 +80,9 @@ class MCPClient {
         // Socket connection
         this.initializeBtn.addEventListener('click', () => this.initializeConnection());
         this.connectIdpBtn.addEventListener('click', () => this.connectToIDP());
+
+        // Logout
+        this.logoutBtn.addEventListener('click', () => this.logout());
 
         // Chat functionality
         this.sendBtn.addEventListener('click', () => this.sendMessage());
@@ -91,8 +99,8 @@ class MCPClient {
         // Sidebar functionality
         this.collapseSidebar.addEventListener('click', () => this.toggleSidebar());
         this.refreshServers.addEventListener('click', () => this.loadAvailableServers());
-        this.getTools.addEventListener('click', () => this.getTools());
-        this.clearHistory.addEventListener('click', () => this.clearHistory());
+        this.getToolsBtn.addEventListener('click', () => this.getTools());
+        this.clearHistoryBtn.addEventListener('click', () => this.clearHistory());
         this.getHistory.addEventListener('click', () => this.showHistory());
 
         // Modal functionality
@@ -410,11 +418,20 @@ class MCPClient {
             this.connectIdpBtn.disabled = true;
             this.connectIdpBtn.style.backgroundColor = '#10b981';
             this.connectIdpBtn.style.color = 'white';
+
+            // Show user info in header
+            if (this.authState.userInfo && this.authState.userInfo.email) {
+                this.userEmail.textContent = this.authState.userInfo.email;
+                this.userInfo.style.display = 'flex';
+            }
         } else {
             this.connectIdpBtn.textContent = 'Connect to IDP';
             this.connectIdpBtn.disabled = !this.isInitialized;
             this.connectIdpBtn.style.backgroundColor = '';
             this.connectIdpBtn.style.color = '';
+
+            // Hide user info in header
+            this.userInfo.style.display = 'none';
         }
     }
 
@@ -854,6 +871,44 @@ class MCPClient {
         // Navigate to authentication URL in the same tab
         const authUrl = "/api/openid/start/bob@tables.fake";
         window.location.href = authUrl;
+    }
+
+    async logout() {
+        if (!this.authState.isAuthenticated) {
+            this.addMessage('system', 'Not currently authenticated');
+            return;
+        }
+
+        try {
+            this.addMessage('system', 'Logging out...');
+
+            // Call backend signout endpoint
+            const response = await fetch('/api/openid/signout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include'
+            });
+
+            if (response.ok) {
+                // Notify socket of logout
+                if (this.socket && this.socket.connected) {
+                    this.socket.emit('logout');
+                }
+
+                // Update local state
+                this.authState = { isAuthenticated: false };
+                this.updateAuthUI();
+
+                this.addMessage('system', '✅ Logged out successfully from Okta session');
+            } else {
+                throw new Error('Logout failed');
+            }
+        } catch (error) {
+            console.error('Logout error:', error);
+            this.addMessage('error', 'Failed to logout. Please try again.');
+        }
     }
 
     autoConnectToServers() {

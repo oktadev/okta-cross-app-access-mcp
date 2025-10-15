@@ -17,9 +17,15 @@
                     <span class="logo-icon">🤖</span>
                     Agent0
                 </h1>
-                <div class="status-indicator">
-                    <div class="status-dot" id="connectionStatus"></div>
-                    <span id="statusText">Disconnected</span>
+                <div class="header-right">
+                    <div class="user-info" id="userInfo" style="display: none;">
+                        <span id="userEmail"></span>
+                        <button id="logoutBtn" class="logout-btn" title="Logout from Okta">Logout</button>
+                    </div>
+                    <div class="status-indicator">
+                        <div class="status-dot" id="connectionStatus"></div>
+                        <span id="statusText">Disconnected</span>
+                    </div>
                 </div>
             </div>
         </header>

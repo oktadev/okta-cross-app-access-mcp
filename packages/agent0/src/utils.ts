@@ -51,6 +51,7 @@ export async function getAccessToken(cookie: any): Promise<any> {
 export function defaultMcpServers(accessToken: any): MCPServerConfig[] {
   console.log(`Access token got${accessToken}`);
   return [
+    /*
     {
       name: 'todo-mcp-server',
       command: '/usr/bin/node',
@@ -58,6 +59,14 @@ export function defaultMcpServers(accessToken: any): MCPServerConfig[] {
       env: {
         ACCESS_TOKEN: accessToken,
       },
+    },*/
+     {
+      name: 'HITLProcy_todo-mcp-server',
+      command: '/usr/bin/node',
+      args: ['dist/mcp-server/HITLProxy.js','todo-mcp-server'],
+      env: {
+        ACCESS_TOKEN: accessToken,
+      }
     },
   ];
 }

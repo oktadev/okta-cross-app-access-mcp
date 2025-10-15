@@ -89,6 +89,7 @@ export default async (app, provider) => {
       // Start an OIDC flow to the provider for this email domain
       req.session.interaction_uid = uid;
       const strategy = createPassportStrategy(providerDetails);
+      strategy._loginHint = params.login_hint;
       passport.authenticate(strategy)(req, res, next);
     } catch (err) {
       next(err);

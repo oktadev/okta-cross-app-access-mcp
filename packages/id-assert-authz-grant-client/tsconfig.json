@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
-    "lib": ["ES2022"],
+    "lib": ["ES2022", "DOM"],
     "allowSyntheticDefaultImports": true,
     "declaration": true,
     "esModuleInterop": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "module": "ES2022",
     "resolveJsonModule": true,
     "skipLibCheck": true,
@@ -16,7 +16,7 @@
     "emitDeclarationOnly": false,
     "sourceMap": true,
     "noUnusedLocals": true,
-    "types": ["node"]
+    "typeRoots": ["./node_modules/@types"]
   },
   "include": ["src", "build.config.ts"]
 }

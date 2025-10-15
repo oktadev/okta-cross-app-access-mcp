@@ -23,7 +23,6 @@
   ],
   "scripts": {
     "build": "unbuild",
-    "postinstall": "yarn build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Kamron Batman <kamronbatman@users.noreply.github.com>",
