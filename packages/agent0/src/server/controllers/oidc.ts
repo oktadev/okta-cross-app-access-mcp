@@ -1,7 +1,12 @@
 import { Router } from 'express';
+import {
+  AccessTokenResult,
+  exchangeIdJwtAuthzGrant,
+  ExchangeTokenResult,
+  requestIdJwtAuthzGrant,
+} from 'id-assert-authz-grant-client';
 import passport from 'passport';
 import OpenIDConnectStrategy, { Profile, VerifyCallback } from 'passport-openidconnect';
-import { AccessTokenResult, exchangeIdJwtAuthzGrant, ExchangeTokenResult, requestIdJwtAuthzGrant } from '../../../../id-assert-authz-grant-client';
 
 import prisma from '../../prisma';
 
@@ -51,7 +56,7 @@ const verify = async (
   profile: Profile,
   context: object,
   idToken: object | string,
-  done: VerifyCallback
+  done: VerifyCallback,
 ) => {
   const externalId = profile.id;
   const authServerOrgKey = externalId.split(':')[0];
@@ -63,7 +68,7 @@ const verify = async (
   const org = await orgFromAuthServerOrgKey(authServerOrgKey);
   if (!org) {
     throw new Error(
-      `No org found for key=${authServerOrgKey}, profile: ${JSON.stringify(profile)}`
+      `No org found for key=${authServerOrgKey}, profile: ${JSON.stringify(profile)}`,
     );
   }
 
@@ -233,7 +238,7 @@ function createStrategy(username: string) {
       callbackURL: `${process.env.AGENT_SERVER}/api/openid/callback/`,
       loginHint: username,
     },
-    verify
+    verify,
   );
 
   // Unregister existing strategy if it exists and register new one
