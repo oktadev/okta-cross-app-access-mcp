@@ -6,6 +6,10 @@ import morgan from 'morgan';
 import path from 'path';
 import { createClient } from 'redis';
 import { Server } from 'socket.io';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 import dotenv from 'dotenv';
 import session from 'express-session';
@@ -322,7 +326,7 @@ class MCPWebServer {
 
           // Test AWS connection
           await mcpClient.sendMessage(
-            'Hello, this is a test message to verify AWS Bedrock connectivity.'
+            'Hello, this is a test message to verify AWS Bedrock connectivity.',
           );
           mcpClient.clearHistory();
 
@@ -413,7 +417,7 @@ class MCPWebServer {
         } catch (error) {
           logger.error(
             `Failed to connect client ${socket.id} to server ${serverConfig.name}`,
-            error
+            error,
           );
           socket.emit('server_connection_result', {
             success: false,
@@ -701,8 +705,7 @@ class MCPWebServer {
       const authServer = process.env.AUTH_SERVER;
       const baseUrl = process.env.APP_BASE_URL || `http://localhost:3000`;
       const redirectUri = encodeURIComponent(`${baseUrl}/api/openid/callback/`);
-      const authUrl =
-        `${authServer}/auth?response_type=code&client_id=agent0&redirect_uri=${redirectUri}&scope=openid%20profile%20email%20openid%20read%20write&login_hint=bob%40tables.fake&state=YmlpYLq2bBsDMoLYRf7Bvx2s`;
+      const authUrl = `${authServer}/auth?response_type=code&client_id=agent0&redirect_uri=${redirectUri}&scope=openid%20profile%20email%20openid%20read%20write&login_hint=bob%40tables.fake&state=YmlpYLq2bBsDMoLYRf7Bvx2s`;
 
       // Make the authentication request
       const response = await fetch(authUrl, {
