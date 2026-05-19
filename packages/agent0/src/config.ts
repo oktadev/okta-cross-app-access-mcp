@@ -1,10 +1,10 @@
 export const BEDROCK_MODELS = {
-  CLAUDE_3_HAIKU: 'anthropic.claude-3-haiku-20240307-v1:0',
-  CLAUDE_3_SONNET: 'anthropic.claude-3-sonnet-20240229-v1:0',
-  CLAUDE_3_OPUS: 'anthropic.claude-3-opus-20240229-v1:0',
-  CLAUDE_3_5_SONNET: 'anthropic.claude-3-5-sonnet-20241022-v2:0',
-  CLAUDE_3_7_SONNET: 'us.anthropic.claude-3-7-sonnet-20250219-v1:0',
+  CLAUDE_HAIKU_4_5: 'us.anthropic.claude-haiku-4-5-20251001-v1:0',
+  CLAUDE_SONNET_4_5: 'us.anthropic.claude-sonnet-4-5-20250929-v1:0',
 } as const;
+
+// Default model to use
+export const DEFAULT_MODEL = BEDROCK_MODELS.CLAUDE_SONNET_4_5;
 
 export const DEFAULT_REGION = 'us-east-1';
 
