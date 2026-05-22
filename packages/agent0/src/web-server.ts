@@ -6,16 +6,12 @@ import morgan from 'morgan';
 import path from 'path';
 import { createClient } from 'redis';
 import { Server } from 'socket.io';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 import dotenv from 'dotenv';
 import session from 'express-session';
 import findConfig from 'find-config';
 import passport from 'passport';
-import { BEDROCK_MODELS } from './config.js';
+import { BEDROCK_MODELS, DEFAULT_MODEL } from './config.js';
 import { logger } from './logger.js';
 import { MCPBedrockClient } from './mcp-bedrock-client.js';
 import prisma from './prisma.js';
@@ -177,7 +173,7 @@ class MCPWebServer {
     this.app.use(express.urlencoded({ extended: true }));
 
     // Static files
-    this.app.use(express.static(path.join(__dirname, '../public')));
+    this.app.use(express.static(path.join(process.cwd(), 'public')));
 
     this.app.locals.redisClient = redisClient;
 
@@ -301,7 +297,7 @@ class MCPWebServer {
 
     // Serve the main page
     this.app.get('/', (req, res) => {
-      res.sendFile(path.join(__dirname, '../public/index.html'));
+      res.sendFile(path.join(process.cwd(), 'public', 'index.html'));
     });
 
     this.app.use('/api/articles', authenticated, article);
@@ -320,8 +316,7 @@ class MCPWebServer {
         try {
           const mcpClient = new MCPBedrockClient({
             region: config.region || process.env.AWS_REGION || 'us-east-1',
-            modelId:
-              config.modelId || process.env.BEDROCK_MODEL_ID || BEDROCK_MODELS.CLAUDE_3_HAIKU,
+            modelId: config.modelId || process.env.BEDROCK_MODEL_ID || DEFAULT_MODEL,
           });
 
           // Test AWS connection
@@ -340,8 +335,7 @@ class MCPWebServer {
             session.bedrockState = {
               isInitialized: true,
               region: config.region || process.env.AWS_REGION || 'us-east-1',
-              modelId:
-                config.modelId || process.env.BEDROCK_MODEL_ID || BEDROCK_MODELS.CLAUDE_3_HAIKU,
+              modelId: config.modelId || process.env.BEDROCK_MODEL_ID || DEFAULT_MODEL,
               initTimestamp: Date.now(),
             };
             session.clientId = socket.id;
@@ -363,8 +357,7 @@ class MCPWebServer {
             bedrockState: {
               isInitialized: true,
               region: config.region || process.env.AWS_REGION || 'us-east-1',
-              modelId:
-                config.modelId || process.env.BEDROCK_MODEL_ID || BEDROCK_MODELS.CLAUDE_3_HAIKU,
+              modelId: config.modelId || process.env.BEDROCK_MODEL_ID || DEFAULT_MODEL,
               initTimestamp: Date.now(),
             },
           });
@@ -635,10 +628,7 @@ class MCPWebServer {
           // Create new MCP client with existing session config
           const mcpClient = new MCPBedrockClient({
             region: session.bedrockState.region || process.env.AWS_REGION || 'us-east-1',
-            modelId:
-              session.bedrockState.modelId ||
-              process.env.BEDROCK_MODEL_ID ||
-              BEDROCK_MODELS.CLAUDE_3_HAIKU,
+            modelId: session.bedrockState.modelId || process.env.BEDROCK_MODEL_ID || DEFAULT_MODEL,
           });
 
           // Test the connection

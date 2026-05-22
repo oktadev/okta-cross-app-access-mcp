@@ -6,7 +6,7 @@ import {
 import { fromEnv } from '@aws-sdk/credential-providers';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
-import { BEDROCK_MODELS, DEFAULT_REGION, SYSTEM_PROMPT } from './config.js';
+import { DEFAULT_MODEL, DEFAULT_REGION, SYSTEM_PROMPT } from './config.js';
 import { logger } from './logger.js';
 import { BedrockClientConfig, ChatMessage, MCPServerConfig } from './types.js';
 
@@ -24,7 +24,7 @@ export class MCPBedrockClient {
       region: config.region || process.env.AWS_REGION || DEFAULT_REGION,
       credentials: fromEnv(),
     });
-    this.modelId = config.modelId || process.env.BEDROCK_MODEL_ID || BEDROCK_MODELS.CLAUDE_3_HAIKU;
+    this.modelId = config.modelId || process.env.BEDROCK_MODEL_ID || DEFAULT_MODEL;
 
     logger.info('Initialized Agent0 MCP Client', {
       region: config.region || process.env.AWS_REGION || DEFAULT_REGION,
@@ -54,7 +54,7 @@ export class MCPBedrockClient {
         },
         {
           capabilities: {},
-        }
+        },
       );
 
       // Connect to the server
@@ -197,14 +197,14 @@ export class MCPBedrockClient {
           const toolResult = await this.callTool(
             toolRequest.server,
             toolRequest.tool,
-            toolRequest.arguments
+            toolRequest.arguments,
           );
 
           // Send tool result back to Claude
           const followUpPrompt = `The tool "${toolRequest.tool}" returned: ${JSON.stringify(
             toolResult,
             null,
-            2
+            2,
           )}\n\nPlease provide a natural language response based on this information.`;
 
           const followUpInput: InvokeModelCommandInput = {
@@ -243,14 +243,14 @@ export class MCPBedrockClient {
               const toolResult = await this.callTool(
                 toolRequest.server,
                 toolRequest.tool,
-                toolRequest.arguments
+                toolRequest.arguments,
               );
 
               // Send tool result back to Claude
               const followUpPrompt = `The tool "${toolRequest.tool}" returned: ${JSON.stringify(
                 toolResult,
                 null,
-                2
+                2,
               )}\n\nPlease provide a natural language response based on this information.`;
 
               const followUpInput: InvokeModelCommandInput = {
@@ -337,7 +337,7 @@ export class MCPBedrockClient {
    */
   async disconnect(): Promise<void> {
     const disconnectPromises = Array.from(this.mcpClients.keys()).map((serverName) =>
-      this.disconnectFromMCPServer(serverName)
+      this.disconnectFromMCPServer(serverName),
     );
     await Promise.all(disconnectPromises);
   }
