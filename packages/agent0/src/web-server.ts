@@ -103,6 +103,19 @@ const sessionMiddleware = session({
   store: redisStore,
 });
 
+// Restrict cross-origin access to the app's own origin(s). A comma-separated
+// ALLOWED_ORIGINS overrides; otherwise fall back to the configured agent base
+// URL. Wildcard origins are intentionally not used so credentials are safe.
+const allowedOrigins = (
+  process.env.ALLOWED_ORIGINS ||
+  process.env.APP_BASE_URL ||
+  process.env.AGENT_SERVER ||
+  'http://localhost:3000'
+)
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
 class MCPWebServer {
   // Find the nearest .env and load it into process.ENV
 
@@ -125,8 +138,9 @@ class MCPWebServer {
     this.server = createServer(this.app);
     this.io = new Server(this.server, {
       cors: {
-        origin: '*',
+        origin: allowedOrigins,
         methods: ['GET', 'POST'],
+        credentials: true,
       },
     });
 
@@ -162,8 +176,9 @@ class MCPWebServer {
 
     this.app.use(express.json());
 
-    // CORS
-    this.app.use(cors());
+    // CORS — restrict to the app's own origin(s); allow credentials so the
+    // session cookie works without exposing the API to arbitrary origins.
+    this.app.use(cors({ origin: allowedOrigins, credentials: true }));
 
     // Logging
     this.app.use(morgan('combined'));
@@ -218,7 +233,7 @@ class MCPWebServer {
     });
 
     // API routes
-    this.app.get('/api/servers', (req, res) => {
+    this.app.get('/api/servers', authenticated, (req, res) => {
       const cookies = req.headers.cookie;
       getAccessToken(cookies).then((token) => {
         res.json(defaultMcpServers(token));
@@ -303,7 +318,6 @@ class MCPWebServer {
     this.app.use('/api/articles', authenticated, article);
     this.app.use('/api/users', authenticated, user);
     this.app.use('/api/tokens', authenticated, authtoken);
-    this.app.use('/api/free/tokens', authtoken);
     this.app.use('/api/openid/', oidc);
   }
 
@@ -380,7 +394,6 @@ class MCPWebServer {
 
       // Connect to MCP server
       socket.on('connect_server', async (serverConfig) => {
-        // todo: Invoke Auth Flow
         const clientData = this.connectedClients.get(socket.id);
         if (!clientData) {
           socket.emit('server_connection_result', {
@@ -390,31 +403,49 @@ class MCPWebServer {
           return;
         }
 
-        try {
-          // Skip token fetching for reminder server as it doesn't use tokens
-          console.log(`⏳ Connecting to MCP server: ${serverConfig.name}`);
+        // SECURITY: never spawn a process from a client-supplied command/args/env.
+        // The client may only name a server; resolve the real, trusted config from
+        // the server-side allowlist. This prevents arbitrary command execution and
+        // stops the client from injecting an access token via env — the token is
+        // re-derived from the caller's own authenticated session.
+        const requestedName = serverConfig?.name;
+        const cookies = (socket.request as any)?.headers?.cookie;
+        const token = await getAccessToken(cookies);
+        const resolvedConfig = defaultMcpServers(token).find((s) => s.name === requestedName);
 
-          await clientData.mcpClient.connectToMCPServer(serverConfig);
-          clientData.connectedServers.push(serverConfig.name);
+        if (!resolvedConfig) {
+          socket.emit('server_connection_result', {
+            success: false,
+            serverName: requestedName,
+            error: 'Unknown or unauthorized MCP server',
+          });
+          return;
+        }
+
+        try {
+          console.log(`⏳ Connecting to MCP server: ${resolvedConfig.name}`);
+
+          await clientData.mcpClient.connectToMCPServer(resolvedConfig);
+          clientData.connectedServers.push(resolvedConfig.name);
 
           // Get available tools
           const tools = await clientData.mcpClient.listAllTools();
 
           socket.emit('server_connection_result', {
             success: true,
-            serverName: serverConfig.name,
-            tools: tools[serverConfig.name] || [],
+            serverName: resolvedConfig.name,
+            tools: tools[resolvedConfig.name] || [],
           });
 
-          logger.success(`Client ${socket.id} connected to server: ${serverConfig.name}`);
+          logger.success(`Client ${socket.id} connected to server: ${resolvedConfig.name}`);
         } catch (error) {
           logger.error(
-            `Failed to connect client ${socket.id} to server ${serverConfig.name}`,
+            `Failed to connect client ${socket.id} to server ${requestedName}`,
             error,
           );
           socket.emit('server_connection_result', {
             success: false,
-            serverName: serverConfig.name,
+            serverName: requestedName,
             error: error instanceof Error ? error.message : 'Unknown error',
           });
         }
