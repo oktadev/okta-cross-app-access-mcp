@@ -4,7 +4,15 @@ import prisma from '../../prisma';
 const controller: Router = Router();
 
 controller.get('/', async (req, res) => {
-  const user = req.user!;
+  // Defense in depth: this controller returns access/refresh tokens, so never
+  // run it without an authenticated user (guards against being mounted on an
+  // unauthenticated route or the auth middleware being bypassed).
+  const user = req.user;
+  if (!user) {
+    res.status(401).json({ error: 'Unauthorized' });
+    return;
+  }
+
   let subjectTokenType = 'urn:ietf:params:oauth:token-type:id_token';
 
   const tokens = await prisma.authorizationToken.findMany({

@@ -16,6 +16,7 @@ export async function authorizationGrantTokenExchange(ctx, configuration, redisC
 
   const { payload } = await jose.jwtVerify(subject_token, jwks, {
     issuer: process.env.AUTH_SERVER,
+    audience: ctx.oidc.client.clientId,
   });
 
   const customer = payload.sub.split(':')[0];
